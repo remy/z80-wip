@@ -1,0 +1,16 @@
+#autoline 10
+RUN AT 3
+
+LOAD "noname.afb" BANK 20
+.install "ayfx_drv.bin"
+DRIVER 83,1,20
+%i=0:%j=0
+REPEAT
+  PRINT AT 0,0;%i;"   "
+  %i=%(i+1) MOD 999
+  IF %i=250 THEN %j=%j+1: PRINT AT 1,0;%j;" calls": DRIVER 83,2,3
+REPEAT UNTIL INKEY$ ="q"
+
+.uninstall "ayfx_drv.bin"
+
+PAUSE 0

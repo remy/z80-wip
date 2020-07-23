@@ -1,0 +1,17 @@
+DISPLAY_FILE:           EQU $4000
+
+; ***************************************************************************
+; * Wait for a period of time                                               *
+; ***************************************************************************
+; Entry: A=timeout
+wait:
+        push bc
+        ld c,$ff
+        ld b,a
+.loop:
+        dec bc
+        ld a,b
+        or c
+        jr nz, .loop
+        pop bc
+        ret

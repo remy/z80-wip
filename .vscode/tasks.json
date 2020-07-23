@@ -1,0 +1,73 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "cspect",
+      "type": "shell",
+      "command": "nohup",
+      "options": {
+        "cwd": "/Applications/cspect/app"
+      },
+      "args": [
+        "mono",
+        "cspect.exe",
+        "-w5",
+        "-basickeys",
+        "-zxnext",
+        "-nextrom",
+        "-exit",
+        "-brk",
+        "-tv",
+        "-mmc=./cspect-next-2gb.img"
+      ],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "sjasmplus",
+      "type": "shell",
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "command": "sjasmplus",
+      "args": [
+        "--lst=${fileDirname}/${fileBasenameNoExtension}.lst",
+        "--zxnext=cspect",
+        "--nologo",
+        "${file}",
+        "--sym=${fileDirname}/${fileBasenameNoExtension}.labels",
+        "--raw=${fileDirname}/${fileBasenameNoExtension}.bin"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": {
+        "fileLocation": ["relative", "${fileDirname}"],
+        "severity": "error",
+        "pattern": {
+          "regexp": "^(.*)\\((\\d+)\\):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "severity": 3,
+          "message": 4
+        }
+      }
+    },
+    {
+      "label": "build",
+      "dependsOn": ["sjasmplus"],
+      "dependsOrder": "sequence"
+    }
+  ]
+}

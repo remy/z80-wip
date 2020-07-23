@@ -1,0 +1,41 @@
+        DEVICE ZXSPECTRUM48
+speed:  EQU $05ff
+start:  EQU $8000
+
+        ORG start
+
+        ld hl,0x4000         ; point to the beginning of DISPLAY_FILE (screen)
+        ld (hl),%10000000       ; draw pixel on screen
+
+move:
+        ld a,(hl)               ; load current pixel into A
+        srl a                   ; shift right and carry
+	ld (hl),a               ; draw new pixel
+        jr c,next_pixel
+        jr wait
+
+next_pixel:
+        inc l
+        ld a, 0x20
+        and l
+        jr z, .skip
+        ld l,0
+        inc h
+
+.skip:
+        ld (hl),0x80
+        jr move
+
+wait:
+        ld bc, speed
+.loop:
+        dec bc
+        ld a,b
+        or c
+        jr nz, .loop
+        jr move
+
+fin:
+        jr $ ; loop forever
+
+        SAVESNA "move-dot.sna", start

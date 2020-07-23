@@ -1,0 +1,10 @@
+---
+filename: interrupt
+source:
+  - loader.bas:
+      start: 10
+      type: program
+      filename: loader
+  - i3.bin:
+      type: code
+      start: 32768

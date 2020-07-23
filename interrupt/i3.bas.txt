@@ -1,0 +1,9 @@
+#program i3
+#autoline 10
+LAYER 0
+CLEAR %($8000-1)
+LOAD "i3.bin" CODE %$8000
+RANDOMIZE % USR $8000
+FOR %i=0 TO 9999
+  PRINT AT 0,0;%i
+NEXT %i

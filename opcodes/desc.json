@@ -1,0 +1,2813 @@
+{
+  "LD r, r'": {
+    page: '71',
+    operation: "LD r, r'",
+    opCode: 'LD',
+    effect: 'r, ← r′',
+    operands: 'r, r′',
+    desc: "The contents of any register r' are loaded to any other register r. r, r' identifies any of the \n" +
+      'registers A, B, C, D, E, H, or L, assembled as follows in the object code:\n' +
+      'Register\tr, C\n' +
+      'A\t111\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n',
+    example: 'If the H Register contains the number 8Ah, and the E register contains 10h, the instruction \n' +
+      '10h.LD H, E results in both registers containing\n'
+  },
+  'LD r,n': {
+    page: '72',
+    operation: 'LD r,n',
+    opCode: 'LD',
+    effect: 'r ← n',
+    operands: 'r, n',
+    desc: 'The 8-bit integer n is loaded to any register r, in which r identifies registers A, B, C, D, E, \n' +
+      'H, or L, assembled as follows in the object code:\n' +
+      'Register\tr\n' +
+      'A\t111\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n',
+    example: 'Upon the execution of an LD E, A5h instruction, Register E contains A5h.\n'
+  },
+  'LD r, (HL)': {
+    page: '74',
+    operation: 'LD r, (HL)',
+    opCode: 'LD',
+    effect: 'r ← (HL)',
+    operands: 'r, (HL)',
+    desc: 'The 8-bit contents of memory location (HL) are loaded to register r, in which r identifies \n' +
+      'registers A, B, C, D, E, H, or L, assembled as follows in the object code:\n' +
+      'Register\tr\n' +
+      'A\t111\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n',
+    example: 'If register pair HL contains the number 75A1h, and memory address 75A1h contains byte \n' +
+      '58h, the execution of LD C, (HL) results in 58h in Register C.\n'
+  },
+  'LD r, (IX+d)': {
+    page: '75',
+    operation: 'LD r, (IX+d)',
+    opCode: 'LD',
+    effect: 'r ← (IX+d)',
+    operands: 'r, (IX+d)',
+    desc: 'The (IX+d) operand (i.e., the contents of Index Register IX summed with two’s-comple-\n' +
+      'ment displacement integer d) is loaded to register r, in which r identifies registers A, B, C, \n' +
+      'D, E, H, or L, assembled as follows in the object code:\n' +
+      'Register\tr\n' +
+      'A\t111\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n',
+    example: 'If Index Register IX contains the number 25AFh, the instruction LD B, (IX+19h) allows \n' +
+      '25AFh + 19h, which points to memory location 25C8h. If this the calculation of the sum \n' +
+      '39h, the instruction results in Register B also containing 39h.address contains byte\n'
+  },
+  'LD r, (IY+d)': {
+    page: '77',
+    operation: 'LD r, (IY+d)',
+    opCode: 'LD',
+    effect: 'r ← (IY+D)',
+    operands: 'r, (lY+d)',
+    desc: 'The operand (lY+d) loads the contents of Index Register IY summed with two’s-comple-\n' +
+      'ment displacement integer, d, to register r, in which r identifies registers A, B, C, D, E, H, \n' +
+      'or L, assembled as follows in the object code:\n' +
+      'Register\tr\n' +
+      'A\t111\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n',
+    example: 'If Index Register IY contains the number 25AFh, the instruction LD B, (IY+19h) allows \n' +
+      '25AFh + 19h, which points to memory location 25C8h. If this the calculation of the sum \n' +
+      '39h, the instruction results in Register B also containing 39h.address contains byte\n'
+  },
+  'LD (HL), r': {
+    page: '79',
+    operation: 'LD (HL), r',
+    opCode: 'LD',
+    effect: '(HL) ← r',
+    operands: '(HL), r',
+    desc: 'The contents of register r are loaded to the memory location specified by the contents of \n' +
+      'the HL register pair. The r symbol identifies registers A, B, C, D, E, H, or L, assembled as \n' +
+      'follows in the object code:\n' +
+      'Register\tr\n' +
+      'A\t111\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n',
+    example: 'If the contents of register pair HL specify memory location 2146h and Register B contains \n' +
+      '29h, then upon the execution of an LD (HL), B instruction, memory address 2146h byte \n' +
+      '29h.also contains\n'
+  },
+  'LD (IX+d), r': {
+    page: '81',
+    operation: 'LD (IX+d), r',
+    opCode: 'LD',
+    effect: '(IX+d) ← r',
+    operands: '(IX+d), r ',
+    desc: 'The contents of register r are loaded to the memory address specified by the contents of \n' +
+      'Index Register IX summed with d, a two’s-complement displacement integer. The r sym-\n' +
+      'bol identifies registers A, B, C, D, E, H, or L, assembled as follows in the object code:\n' +
+      'Register\tr\n' +
+      'A\t111\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n',
+    example: 'If the C register contains byte 1Ch, and Index Register IX contains 3100h, then the \n' +
+      '6h), C performs the sum 3100h + 6h and loads 1Ch to memory instruction LID (IX + \n' +
+      '3106h.location\n'
+  },
+  'LD (IY+d), r': {
+    page: '83',
+    operation: 'LD (IY+d), r',
+    opCode: 'LD',
+    effect: '(lY+d) ← r',
+    operands: '(lY+d), r',
+    desc: 'The contents of resister r are loaded to the memory address specified by the sum of the \n' +
+      'contents of Index Register IY and d, a two’s-complement displacement integer. The r sym-\n' +
+      'bol is specified according to the following table.\n' +
+      'Register\tr\n' +
+      'A\t111\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n',
+    example: 'If the C register contains byte 48h, and Index Register IY contains 2A11h, then the \n' +
+      '4h), C performs the sum 2A11h + 4h, and loads 48h to memory instruction LD (IY + \n' +
+      '2A15.location\n'
+  },
+  'LD (HL), n': {
+    page: '85',
+    operation: 'LD (HL), n',
+    opCode: 'LD',
+    effect: '(HL) ← n',
+    operands: '(HL), n',
+    desc: 'The n integer is loaded to the memory address specified by the contents of the HL register \n' +
+      'pair.\n',
+    example: 'If the HL register pair contains 4444h, the instruction LD (HL), 28h results in the mem-\n' +
+      '4444h containing byte 28h.ory location\n'
+  },
+  'LD (IX+d), n': {
+    page: '86',
+    operation: 'LD (IX+d), n',
+    opCode: 'LD',
+    effect: '(IX+d) ← n',
+    operands: '(IX+d), n',
+    desc: 'The n operand is loaded to the memory address specified by the sum of Index Register IX \n' +
+      'and the two’s complement displacement operand d.\n',
+    example: 'If Index Register IX contains the number 219Ah, then upon execution of an LD (IX+5h), \n' +
+      '5Ah instruction, byte 5Ah is contained in memory address 219Fh.\n'
+  },
+  'LD (IY+d), n': {
+    page: '87',
+    operation: 'LD (IY+d), n',
+    opCode: 'LD',
+    effect: '(lY+d) ← n',
+    operands: '(lY+d), n',
+    desc: 'The n integer is loaded to the memory location specified by the contents of Index Register \n' +
+      'summed with the two’s-complement displacement integer, d.\n',
+    example: 'If Index Register IY contains the number A940h, the instruction LD (IY+10h), 97h \n' +
+      'results in byte 97h in memory location A950h.\n'
+  },
+  'LD A, (BC)': {
+    page: '88',
+    operation: 'LD A, (BC)',
+    opCode: 'LD',
+    effect: 'A ← (BC)',
+    operands: 'A, (BC)',
+    desc: 'The contents of the memory location specified by the contents of the BC register pair are \n' +
+      'loaded to the Accumulator.\n',
+    example: 'If the BC register pair contains the number 4747h, and memory address 4747h contains \n' +
+      '12h, then the instruction LD A, (BC) results in byte 12h in Register A.byte\n'
+  },
+  'LD A, (DE)': {
+    page: '89',
+    operation: 'LD A, (DE)',
+    opCode: 'LD',
+    effect: 'A ← (DE)',
+    operands: 'A, (DE)',
+    desc: 'The contents of the memory location specified by the register pair DE are loaded to the \n' +
+      'Accumulator.\n',
+    example: 'If the DE register pair contains the number 30A2h and memory address 30A2h contains \n' +
+      '22h, then the instruction LD A, (DE) results in byte 22h in Register A.byte\n'
+  },
+  'LD A, (nn)': {
+    page: '90',
+    operation: 'LD A, (nn)',
+    opCode: 'LD',
+    effect: 'A ← (nn)',
+    operands: 'A, (nn)',
+    desc: 'The contents of the memory location specified by the operands nn are loaded to the Accu-\n' +
+      'mulator. The first n operand after the op code is the low-order byte of a 2-byte memory \n' +
+      'address.\n',
+    example: 'If nn contains 8832h and memory address 8832h contains byte 04h, then upon the execu-\n' +
+      '04h byte is in the Accumulator.tion of an LD A, (nn) instruction, the\n'
+  },
+  'LD (BC), A': {
+    page: '91',
+    operation: 'LD (BC), A',
+    opCode: 'LD',
+    effect: '(BC) ← A',
+    operands: '(BC), A',
+    desc: 'The contents of the Accumulator are loaded to the memory location specified by the con-\n' +
+      'tents of the register pair BC.\n',
+    example: 'If the Accumulator contains 7Ah and the BC register pair contains 1212h the instruction \n' +
+      '7Ah in memory location 1212h.LD (BC), A results in\n'
+  },
+  'LD (DE), A': {
+    page: '92',
+    operation: 'LD (DE), A',
+    opCode: 'LD',
+    effect: '(DE) ← A',
+    operands: '(DE), A',
+    desc: 'The contents of the Accumulator are loaded to the memory location specified by the con-\n' +
+      'tents of the DE register pair.\n',
+    example: 'If register pair DE contains 1128h and the Accumulator contains byte A0h, then the exe-\n' +
+      'A0h being stored in memory location 1128h.cution of a LD (DE), A instruction results in\n'
+  },
+  'LD (nn), A': {
+    page: '93',
+    operation: 'LD (nn), A',
+    opCode: 'LD',
+    effect: '(nn) ← A',
+    operands: '(nn), A',
+    desc: 'The contents of the Accumulator are loaded to the memory address specified by the oper-\n' +
+      'and nn. The first n operand after the op code is the low-order byte of nn.\n',
+    example: 'If the Accumulator contains byte D7h, then executing an LD (3141h), AD7h instruction \n' +
+      '3141h.results in memory location\n'
+  },
+  'LD A, I': {
+    page: '94',
+    operation: 'LD A, I',
+    opCode: 'LD',
+    effect: 'A ← 1',
+    operands: 'A, I',
+    desc: 'The contents of the Interrupt Vector Register I are loaded to the Accumulator.\n',
+    example: 'Condition Bits Affected\n' +
+      'S is set if the I Register is negative; otherwise, it is reset.\n' +
+      'Z is set if the I Register is 0; otherwise, it is reset.\n' +
+      'H is reset.\n' +
+      'P/V contains contents of IFF2.\n' +
+      'N is reset.\n' +
+      'C is not affected.\n' +
+      'If an interrupt occurs during execution of this instruction, the Parity flag contains a 0.\n'
+  },
+  'LD A, R': {
+    page: '95',
+    operation: 'LD A, R',
+    opCode: 'LD',
+    effect: 'A ← R',
+    operands: 'A, R',
+    desc: 'The contents of Memory Refresh Register R are loaded to the Accumulator.\n',
+    example: 'Condition Bits Affected\n' +
+      'S is set if, R-Register is negative; otherwise, it is reset.\n' +
+      'Z is set if the R Register is 0; otherwise, it is reset.\n' +
+      'H is reset.\n' +
+      'P/V contains contents of IFF2.\n' +
+      'N is reset.\n' +
+      'C is not affected.\n' +
+      'If an interrupt occurs during execution of this instruction, the parity flag contains a 0.\n'
+  },
+  'LD I,A': {
+    page: '96',
+    operation: 'LD I,A',
+    opCode: 'LD',
+    effect: 'I ← A',
+    operands: 'I, A',
+    desc: 'The contents of the Accumulator are loaded to the Interrupt Control Vector Register, I.\n',
+    example: 'Condition Bits Affected\nNone.\n'
+  },
+  'LD R, A': {
+    page: '97',
+    operation: 'LD R, A',
+    opCode: 'LD',
+    effect: 'R ← A',
+    operands: 'R, A',
+    desc: 'The contents of the Accumulator are loaded to the Memory Refresh register R.\n',
+    example: 'Condition Bits Affected\n' +
+      'None.\n' +
+      '16-Bit Load Group\n' +
+      'The following 16-bit load instructions are each described in this section. Simply click to \n' +
+      'jump to an instruction’s description to learn more.\n' +
+      ' – see page 99LD dd, nn\n' +
+      ' – see page 100LD IX, nn\n' +
+      ' – see page 101LD IY, nn\n' +
+      ' – see page 102LD HL, (nn)\n' +
+      ' – see page 103LD dd, (nn)\n' +
+      ' – see page 105LD IX, (nn)\n' +
+      ' – see page 106LD IY, (nn)\n' +
+      ' – see page 107LD (nn), HL\n' +
+      ' – see page 108LD (nn), dd\n' +
+      ' – see page 110LD (nn), IX\n' +
+      ' – see page 111LD (nn), IY\n' +
+      ' – see page 112LD SP, HL\n' +
+      ' – see page 113LD SP, IX\n' +
+      ' – see page 114LD SP, IY\n' +
+      ' – see page 115PUSH qq\n' +
+      ' – see page 117PUSH IX\n' +
+      ' – see page 118PUSH IY\n' +
+      ' – see page 119POP qq\n' +
+      ' – see page 121POP IX\n' +
+      ' – see page 122POP IY\n'
+  },
+  'LD dd, nn': {
+    page: '99',
+    operation: 'LD dd, nn',
+    opCode: 'LD',
+    effect: 'dd ← nn',
+    operands: 'dd, nn',
+    desc: 'The 2-byte integer nn is loaded to the dd register pair, in which dd defines the BC, DE, \n' +
+      'HL, or SP register pairs, assembled as follows in the object code:\n' +
+      'Pair\tdd\n' +
+      'BC\t00\n' +
+      'DE\t01\n' +
+      'HL\t10\n' +
+      'SP\t11\n' +
+      'The first n operand after the op code is the low-order byte.\n',
+    example: 'Upon the execution of an LD HL, 5000h instruction, the HL register pair contains 5000h.\n'
+  },
+  'LD IX, nn': {
+    page: '100',
+    operation: 'LD IX, nn',
+    opCode: 'LD',
+    effect: 'IX ← nn',
+    operands: 'IX, nn',
+    desc: 'The n integer is loaded to Index Register IX. The first n operand after the op code is the \n' +
+      'low-order byte.\n',
+    example: 'Upon the execution of an LD IX, 45A2h instruction, the index register contains integer \n' +
+      '45A2h.\n'
+  },
+  'LD IY, nn': {
+    page: '101',
+    operation: 'LD IY, nn',
+    opCode: 'LD',
+    effect: 'IY ← nn',
+    operands: 'IY, nn',
+    desc: 'The nn integer is loaded to Index Register IY. The first n operand after the op code is the \n' +
+      'low-order byte.\n',
+    example: 'Upon the execution of a LD IY, 7733h instruction, Index Register IY contains the integer \n' +
+      '7733h.\n'
+  },
+  'LD HL, (nn)': {
+    page: '102',
+    operation: 'LD HL, (nn)',
+    opCode: 'LD',
+    effect: 'H ← (nn + 1), L ← (nn)',
+    operands: 'HL, (nn)',
+    desc: 'The contents of memory address (nn) are loaded to the low-order portion of register pair \n' +
+      'HL (Register L), and the contents of the next highest memory address (nn + 1) are loaded \n' +
+      'to the high-order portion of HL (Register H). The first n operand after the op code is the \n' +
+      'low-order byte of nn.\n',
+    example: 'If address 4545h contains 37h and address 4546h contains A1h, then upon the execution \n' +
+      '4545h) instruction, the HL register pair contains A137h.of an LD HL, (\n'
+  },
+  'LD dd, (nn)': {
+    page: '103',
+    operation: 'LD dd, (nn)',
+    opCode: 'LD',
+    effect: 'ddh ← (nn + 1) ddl ← (nn)',
+    operands: 'dd, (nn)',
+    desc: 'The contents of address (nn) are loaded to the low-order portion of register pair dd, and the \n' +
+      'contents of the next highest memory address (nn + 1) are loaded to the high-order portion \n' +
+      'of dd. Register pair dd defines BC, DE, HL, or SP register pairs, assembled as follows in \n' +
+      'the object code:\n' +
+      'Pair\tdd\n' +
+      'BC\t00\n' +
+      'DE\t01\n' +
+      'HL\t10\n' +
+      'SP\t11\n' +
+      'The first n operand after the op code is the low-order byte of (nn).\n',
+    example: 'If Address 2130h contains 65h and address 2131h contains 78h, then upon the execution \n' +
+      '2130h) instruction, the BC register pair contains 7865h.of an LD BC, (\n'
+  },
+  'LD IX, (nn)': {
+    page: '105',
+    operation: 'LD IX, (nn)',
+    opCode: 'LD',
+    effect: 'IXh ← (nn + 1), IXI ← (nn)',
+    operands: 'IX, (nn)',
+    desc: 'The contents of the address (nn) are loaded to the low-order portion of Index Register IX, \n' +
+      'and the contents of the next highest memory address (nn + 1) are loaded to the high-order \n' +
+      'portion of IX. The first n operand after the op code is the low-order byte of nn.\n',
+    example: 'If address 6666h contains 92h, and address 6667h contains DAh, then upon the execution \n' +
+      '6666h) instruction, Index Register IX contains DA92h.of an LD IX, (\n'
+  },
+  'LD IY, (nn)': {
+    page: '106',
+    operation: 'LD IY, (nn)',
+    opCode: 'LD',
+    effect: 'IYh ← (nn + 1), IYI ← nn)',
+    operands: 'IY, (nn)',
+    desc: 'The contents of address (nn) are loaded to the low-order portion of Index Register IY, and \n' +
+      'the contents of the next highest memory address (nn + 1) are loaded to the high-order por-\n' +
+      'tion of IY. The first n operand after the op code is the low-order byte of nn.\n',
+    example: 'If address 6666h contains 92h, and address 6667h contains DAh, then upon the execution \n' +
+      '6666h) instruction, Index Register IY contains DA92h.of an LD IY, (\n'
+  },
+  'LD (nn), HL': {
+    page: '107',
+    operation: 'LD (nn), HL',
+    opCode: 'LD',
+    effect: '(nn + 1) ← H, (nn) ← L',
+    operands: '(nn), HL',
+    desc: 'The contents of the low-order portion of register pair HL (Register L) are loaded to mem-\n' +
+      'ory address (nn), and the contents of the high-order portion of HL (Register H) are loaded \n' +
+      'to the next highest memory address (nn + 1).  The  first n operand after the op code is the \n' +
+      'low-order byte of nn.\n',
+    example: 'If register pair HL contains 483Ah, then upon the execution of an LD (B2291 – 1), HL \n' +
+      'B229h contains 3Ah and address B22Ah contains 48h.instruction, address\n'
+  },
+  'LD (nn), dd': {
+    page: '108',
+    operation: 'LD (nn), dd',
+    opCode: 'LD',
+    effect: '(nn + 1) ← ddh, (nn) ← ddl',
+    operands: '(nn), dd',
+    desc: 'The low-order byte of register pair dd is loaded to memory address (nn); the upper byte is \n' +
+      'loaded to memory address (nn + 1).  Register  pair dd defines either BC, DE, HL, or SP, \n' +
+      'assembled as follows in the object code:\n' +
+      'Pair\tdd\n' +
+      'BC\t00\n' +
+      'DE\t01\n' +
+      'HL\t10\n' +
+      'SP\t11\n' +
+      'The first n operand after the op code is the low-order byte of a two byte memory address.\n',
+    example: 'If register pair BC contains the number 4644h, the instruction LD (1000h), BC results in \n' +
+      '44h in memory location 1000h, and 46h in memory location 1001h.\n'
+  },
+  'LD (nn), IX': {
+    page: '110',
+    operation: 'LD (nn), IX',
+    opCode: 'LD',
+    effect: '(nn + 1) ← IXh, (nn) ← IXI',
+    operands: '(nn), IX',
+    desc: 'The low-order byte in Index Register IX is loaded to memory address (nn); the upper order \n' +
+      'byte is loaded to the next highest address (nn + 1).  The  first n operand after the op code is \n' +
+      'the low-order byte of nn.\n',
+    example: 'If Index Register IX contains 5A30h, then upon the execution of an LD (4392h), IX \n' +
+      '4392h contains number 30h and location 4393h contains instruction, memory location \n' +
+      '5Ah.\n'
+  },
+  'LD (nn), IY': {
+    page: '111',
+    operation: 'LD (nn), IY',
+    opCode: 'LD',
+    effect: '(nn + 1) ← IYh, (nn) ← IYI',
+    operands: '(nn), IY',
+    desc: 'The low-order byte in Index Register IY is loaded to memory address (nn); the upper order \n' +
+      'byte is loaded to memory location (nn + 1).  The  first n operand after the op code is the low-\n' +
+      'order byte of nn.\n',
+    example: 'If Index Register IY contains 4174h, then upon the execution of an LD (8838h), IY \n' +
+      '8838h contains 74h and memory location 8839h contains instruction, memory location \n' +
+      '41h.\n'
+  },
+  'LD SP, HL': {
+    page: '112',
+    operation: 'LD SP, HL',
+    opCode: 'LD',
+    effect: 'SP ← HL',
+    operands: 'SP, HL',
+    desc: 'The contents of the register pair HL are loaded to the Stack Pointer (SP).\n',
+    example: 'If the register pair HL contains 442Eh, then upon the execution of an LD SP, HL instruc-\n' +
+      '442Eh.tion, the Stack Pointer also contains\n'
+  },
+  'LD SP, IX': {
+    page: '113',
+    operation: 'LD SP, IX',
+    opCode: 'LD',
+    effect: 'SP ← IX',
+    operands: 'SP, IX',
+    desc: 'The 2-byte contents of Index Register IX are loaded to the Stack Pointer (SP).\n',
+    example: 'If Index Register IX contains 98DAh, then upon the execution of an LD SP, IX instruction, \n' +
+      '98DAh.the Stack Pointer also contains\n'
+  },
+  'LD SP, IY': {
+    page: '114',
+    operation: 'LD SP, IY',
+    opCode: 'LD',
+    effect: 'SP ← IY',
+    operands: 'SP, IY',
+    desc: 'The 2-byte contents of Index Register IY are loaded to the Stack Pointer SP.\n',
+    example: 'If Index Register IY contains the integer A227h, then upon the execution of an LD SP, IY \n' +
+      'A227h.instruction, the Stack Pointer also contains\n'
+  },
+  'PUSH qq': {
+    page: '115',
+    operation: 'PUSH qq',
+    opCode: 'PUSH',
+    effect: '(SP – 2) ← qqL, (SP – 1) ← qqH',
+    operands: 'qq',
+    desc: 'The contents of the register pair qq are pushed to the external memory last-in, first-out \n' +
+      '(LIFO) stack. The Stack Pointer (SP) Register pair holds the 16-bit address of the current \n' +
+      'top of the Stack. This instruction first decrements SP and loads the high-order byte of reg-\n' +
+      'ister pair qq to the memory address specified by the SP. The SP is decremented again and \n' +
+      'loads the low-order byte of qq to the memory location corresponding to this new address \n' +
+      'in the SP. The operand qq identifies register pair BC, DE, HL, or AF, assembled as follows \n' +
+      'in the object code:\n' +
+      'Pair\tqq\n' +
+      'BC\t00\n' +
+      'DE\t01\n' +
+      'HL\t10\n' +
+      'AF\t11\n',
+    example: 'If the AF Register pair contains 2233h and the Stack Pointer contains 1007h, then upon \n' +
+      '1006h contains 22h, memory the execution of a PUSH AF instruction, memory address \n' +
+      '1005h contains 33h, and the Stack Pointer contains 1005h.address\n'
+  },
+  'PUSH IX': {
+    page: '117',
+    operation: 'PUSH IX',
+    opCode: 'PUSH',
+    effect: '(SP – 2) ← IXL, (SP – 1) ← IXH',
+    operands: 'IX',
+    desc: 'The contents of Index Register IX are pushed to the external memory last-in, first-out \n' +
+      '(LIFO) stack. The Stack Pointer (SP) Register pair holds the 16-bit address of the current \n' +
+      'top of the Stack. This instruction first decrements SP and loads the high-order byte of IX \n' +
+      'to the memory address specified by SP; then decrements SP again and loads the low-order \n' +
+      'byte to the memory location corresponding to this new address in SP.\n',
+    example: 'If Index Register IX contains 2233h and the Stack Pointer contains 1007h, then upon the \n' +
+      '1006h contains 22h, memory execution of a PUSH IX instruction, memory address \n' +
+      '1005h contains 33h, and the Stack Pointer contains 1005h.address\n'
+  },
+  'PUSH IY': {
+    page: '118',
+    operation: 'PUSH IY',
+    opCode: 'PUSH',
+    effect: '(SP – 2) ← IYL, (SP – 1) ← IYH',
+    operands: 'IY',
+    desc: 'The contents of Index Register IY are pushed to the external memory last-in, first-out \n' +
+      '(LIFO) stack. The Stack Pointer (SP) Register pair holds the 16-bit address of the current \n' +
+      'top of the Stack. This instruction first decrements the SP and loads the high-order byte of \n' +
+      'IY to the memory address specified by SP; then decrements SP again and loads the low-\n' +
+      'order byte to the memory location corresponding to this new address in SP.\n',
+    example: 'If Index Register IY contains 2233h and the Stack Pointer contains 1007h, then upon the \n' +
+      '1006h contains 22h, memory execution of a PUSH IY instruction, memory address \n' +
+      '1005h contains 33h, and the Stack Pointer contains 1005h.address\n'
+  },
+  'POP qq': {
+    page: '119',
+    operation: 'POP qq',
+    opCode: 'POP',
+    effect: 'qqH ← (SP+1), qqL ← (SP)',
+    operands: 'qq',
+    desc: 'The top two bytes of the external memory last-in, first-out (LIFO) stack are popped to reg-\n' +
+      'ister pair qq. The Stack Pointer (SP) Register pair holds the 16-bit address of the current \n' +
+      'top of the Stack. This instruction first loads to the low-order portion of qq, the byte at the \n' +
+      'memory location corresponding to the contents of SP; then SP is incremented and the con-\n' +
+      'tents of the corresponding adjacent memory location are loaded to the high-order portion \n' +
+      'of qq and the SP is now incremented again. The operand qq identifies register pair BC, \n' +
+      'DE, HL, or AF, assembled as follows in the object code:\n' +
+      'Pair\tr\n' +
+      'BC\t00\n' +
+      'DE\t01\n' +
+      'HL\t10\n' +
+      'AF\t11\n',
+    example: 'If the Stack Pointer contains 1000h, memory location 1000h contains 55h, and location \n' +
+      '1001h contains 33h, the instruction POP HL results in register pair HL containing 3355h, \n' +
+      '1002h.and the Stack Pointer containing\n'
+  },
+  'POP IX': {
+    page: '121',
+    operation: 'POP IX',
+    opCode: 'POP',
+    effect: 'IXH ← (SP+1), IXL ← (SP)',
+    operands: 'IX',
+    desc: 'The top two bytes of the external memory last-in, first-out (LIFO) stack are popped to \n' +
+      'Index Register IX. The Stack Pointer (SP) Register pair holds the 16-bit address of the \n' +
+      'current top of the Stack. This instruction first loads to the low-order portion of IX the byte \n' +
+      'at the memory location corresponding to the contents of SP; then SP is incremented and \n' +
+      'the contents of the corresponding adjacent memory location are loaded to the high-order \n' +
+      'portion of IX. The SP is incremented again.\n',
+    example: 'If the Stack Pointer contains 1000h, memory location 1000h contains 55h, and location \n' +
+      '1001h contains 33h, the instruction POP IX results in Index Register IX containing \n' +
+      '3355h, and the Stack Pointer containing 1002h.\n'
+  },
+  'POP IY': {
+    page: '122',
+    operation: 'POP IY',
+    opCode: 'POP',
+    effect: 'IYH ← (SP – X1), IYL ← (SP)',
+    operands: 'IY',
+    desc: 'The top two bytes of the external memory last-in, first-out (LIFO) stack are popped to \n' +
+      'Index Register IY. The Stack Pointer (SP) Register pair holds the 16-bit address of the cur-\n' +
+      'rent top of the Stack. This instruction first loads to the low-order portion of IY the byte at \n' +
+      'the memory location corresponding to the contents of SP; then SP is incremented and the \n' +
+      'contents of the corresponding adjacent memory location are loaded to the high-order por-\n' +
+      'tion of IY. The SP is incremented again.\n',
+    example: 'If the Stack Pointer Contains 1000h, memory location 1000h contains 55h, and location \n' +
+      '1001h contains 33h, the instruction POP IY results in Index Register IY containing \n' +
+      '3355h, and the Stack Pointer containing 1002h.\n' +
+      'Exchange, Block Transfer, and Search Group\n' +
+      'The following exchange, block transfer, and search group instructions are each described \n' +
+      'in this section. Simply click to jump to an instruction’s description to learn more.\n' +
+      ' – see page 124EX DE, HL\n' +
+      ' – see page 125EX AF, AF′\n' +
+      ' – see page 126EXX\n' +
+      ' – see page 127EX (SP), HL\n' +
+      ' – see page 128EX (SP), IX\n' +
+      ' – see page 129EX (SP), IY\n' +
+      ' – see page 130LDI\n' +
+      ' – see page 132LDIR\n' +
+      ' – see page 134LDD\n' +
+      ' – see page 136LDDR\n' +
+      ' – see page 138CPI\n' +
+      ' – see page 139CPIR\n' +
+      ' – see page 141CPD\n' +
+      ' – see page 142CPDR\n'
+  },
+  'EX DE, HL': {
+    page: '124',
+    operation: 'EX DE, HL',
+    opCode: 'EX',
+    effect: 'DE ↔ HL',
+    operands: 'DE, HL',
+    desc: 'The 2-byte contents of register pairs DE and HL are exchanged.\n',
+    example: 'If register pair DE contains 2822h and register pair HL contains 499Ah, then upon the \n' +
+      '499Ah and register pair execution of an EX DE, HL instruction, register pair DE contains \n' +
+      '2822h.HL contains\n'
+  },
+  'EX AF, AF′': {
+    page: '125',
+    operation: 'EX AF, AF′',
+    opCode: 'EX',
+    effect: "AF ↔ AF'",
+    operands: 'AF, AF′',
+    desc: "The 2-byte contents of the register pairs AF and AF' are exchanged. Register pair AF con-\n" +
+      'sists of registers A′ and F′.\n',
+    example: 'If register pair AF contains 9900h and register pair AF′ contains 5944h, the contents of \n' +
+      '5944h and the contents of AF′ are 9900h upon execution of the EX AF, AF′ AF are \n' +
+      'instruction.\n'
+  },
+  EXX: {
+    page: '126',
+    operation: 'EXX',
+    opCode: 'EXX',
+    effect: "(BC) ↔ (BC′), (DE) ↔ (DE'), (HL) ↔ (HL′)",
+    operands: 'None.',
+    desc: 'Each 2-byte value in register pairs BC, DE, and HL is exchanged with the 2-byte value in \n' +
+      "BC', DE', and HL', respectively.\n",
+    example: 'If register pairs BC, DE, and HL contain 445Ah, 3DA2h, and 8859h, respectively, and \n' +
+      '0988h, 9300h, and 00E7h, respectively, then register pairs BC’, DE’, and HL’ contain \n' +
+      '0988h; DE contains 9300h; HL upon the execution of an EXX instruction, BC contains \n' +
+      '00E7h; BC’ contains 445Ah; DE’ contains 3DA2h; and HL’ contains 8859h.contains\n'
+  },
+  'EX (SP), HL': {
+    page: '127',
+    operation: 'EX (SP), HL',
+    opCode: 'EX',
+    effect: 'H ↔ (SP+1), L ↔ (SP)',
+    operands: '(SP), HL',
+    desc: 'The low-order byte contained in register pair HL is exchanged with the contents of the \n' +
+      'memory address specified by the contents of register pair SP (Stack Pointer), and the high-\n' +
+      'order byte of HL is exchanged with the next highest memory address (SP+1).\n',
+    example: 'If the HL register pair contains 7012h, the SP register pair contains 8856h, the memory \n' +
+      '8856h contains byte 11h, and memory location 8857h contains byte 22h, then location \n' +
+      '2211h, the instruction EX (SP), HL results in the HL register pair containing number \n' +
+      '8856h containing byte 12h, memory location 8857h containing byte memory location \n' +
+      '70h and Stack Pointer containing 8856h.\n'
+  },
+  'EX (SP), IX': {
+    page: '128',
+    operation: 'EX (SP), IX',
+    opCode: 'EX',
+    effect: 'IXH ↔ (SP+1), IXL ↔ (SP)',
+    operands: '(SP), IX',
+    desc: 'The low-order byte in Index Register IX is exchanged with the contents of the memory \n' +
+      'address specified by the contents of register pair SP (Stack Pointer), and the high-order \n' +
+      'byte of IX is exchanged with the next highest memory address (SP+1).\n',
+    example: 'If Index Register IX contains 3988h, the SP register pair Contains 0100h, memory loca-\n' +
+      '0100h contains byte 90h, and memory location 0101h contains byte 48h, then the tion \n' +
+      '4890h, memory instruction EX (SP), IX results in the IX register pair containing number \n' +
+      '0100h containing 88h, memory location 0101h containing 39h, and the Stack location \n' +
+      '0100h.Pointer containing\n'
+  },
+  'EX (SP), IY': {
+    page: '129',
+    operation: 'EX (SP), IY',
+    opCode: 'EX',
+    effect: 'IYH ↔ (SP+1), IYL ↔ (SP)',
+    operands: '(SP), IY',
+    desc: 'The low-order byte in Index Register IY is exchanged with the contents of the memory \n' +
+      'address specified by the contents of register pair SP (Stack Pointer), and the high-order \n' +
+      'byte of IY is exchanged with the next highest memory address (SP+1).\n',
+    example: 'If Index Register IY contains 3988h, the SP register pair contains 0100h, memory loca-\n' +
+      '0100h contains byte 90h, and memory location 0101h contains byte 48h, then the tion \n' +
+      '4890h, memory instruction EX (SP), IY results in the IY register pair containing number \n' +
+      '0100h containing 88h, memory location 0101h containing 39h, and the Stack location \n' +
+      '0100h.Pointer containing\n'
+  },
+  LDI: {
+    page: '130',
+    operation: 'LDI',
+    opCode: 'LDI',
+    effect: '(DE) ← (HL), DE ← DE + 1, HL ← HL + 1, BC ← BC – 1',
+    operands: 'None',
+    desc: 'A byte of data is transferred from the memory location addressed, by the contents of the \n' +
+      'HL register pair to the memory location addressed by the contents of the DE register pair. \n' +
+      'Then both these register pairs are incremented and the Byte Counter (BC) Register pair is \n' +
+      'decremented.\n',
+    example: 'If the HL register pair contains 1111h, memory location 1111h contains byte 88h, the DE \n' +
+      '2222h, the memory location 2222h contains byte 66h, and the BC register pair contains\n' +
+      'register pair contains 7h, then the instruction LDI results in the following contents in reg-\n' +
+      'ister pairs and memory addresses:\n' +
+      'HL                     contains                     1112h\n' +
+      '(1111h)              contains              88h\n' +
+      'DE                     contains                     2223h\n' +
+      '(2222h)              contains                            88h\n' +
+      'BC                     contains                                          6H\n'
+  },
+  LDIR: {
+    page: '132',
+    operation: 'LDIR',
+    opCode: 'LDIR',
+    effect: 'repeat {(DE) ← (HL), DE ← DE + 1, HL ← HL + 1, BC ← BC – 1} while (BC ≠ 0)',
+    operands: 'None',
+    desc: 'This 2-byte instruction transfers a byte of data from the memory location addressed by the \n' +
+      'contents of the HL register pair to the memory location addressed by the DE register pair. \n' +
+      'Both these register pairs are incremented and the Byte Counter (BC) Register pair is dec-\n' +
+      'remented. If decrementing allows the BC to go to 0, the instruction is terminated. If BC is \n' +
+      'not 0, the program counter is decremented by two and the instruction is repeated. Inter-\n' +
+      'rupts are recognized and two refresh cycles are executed after each data transfer. When the \n' +
+      'BC is set to 0 prior to instruction execution, the instruction loops through 64 KB.\n' +
+      'For BC ≠ 0:\n',
+    example: 'The HL register pair contains 11111h, the DE register pair contains 2222h, the BC regis-\n' +
+      '0003h, and memory locations contain the following data.ter pair contains \n' +
+      '(1111h)         contains         88h            (2222h)            contains            66h\n' +
+      '(1112h)         contains         36h            (2223h)            contains            59h\n' +
+      '(1113h)         contains         A5h            (2224h)            contains            C5h\n' +
+      'Upon the execution of an LDIR instruction, the contents of register pairs and memory \n' +
+      'locations now contain:\n' +
+      'HL             contains             1114h\n' +
+      'DE            contains            2225h\n' +
+      'BC            contains            0000h\n' +
+      '(1111h)         contains            88h            (2222h)\tcontains                    88h\n' +
+      '(1112h)         contains            36h            (2223h)\tcontains                    36h\n' +
+      '(1113h)         contains            A5h            (2224h)\tcontains                    A5h\n'
+  },
+  LDD: {
+    page: '134',
+    operation: 'LDD',
+    opCode: 'LDD',
+    effect: '(DE) ← (HL), DE ← DE – 1, HL ← HL– 1, BC ← BC– 1',
+    operands: 'None.',
+    desc: 'This 2-byte instruction transfers a byte of data from the memory location addressed by the \n' +
+      'contents of the HL register pair to the memory location addressed by the contents of the \n' +
+      'DE register pair. Then both of these register pairs including the Byte Counter (BC) Regis-\n' +
+      'ter pair are decremented.\n',
+    example: 'If the HL register pair contains 1111h, memory location 1111h contains byte 88h, the DE \n' +
+      '2222h, memory location 2222h contains byte 66h, and the BC reg-register pair contains\n' +
+      'ister pair contains 7h, then instruction LDD results in the following contents in register \n' +
+      'pairs and memory addresses:\n' +
+      'HL                 contains\t1110h\n' +
+      '(1111h)             contains\t             88h\n' +
+      'DE                 contains\t                 2221h\n' +
+      '(2222h)             contains\t             88h\n' +
+      'BC                 contains\t                 6h\n'
+  },
+  LDDR: {
+    page: '136',
+    operation: 'LDDR',
+    opCode: 'LDDR',
+    effect: '(DE) ← (HL), DE ← DE – 1, HL ← HL – 1, BC ← BC – 1',
+    operands: 'None.',
+    desc: 'This 2-byte instruction transfers a byte of data from the memory location addressed by the \n' +
+      'contents of the HL register pair to the memory location addressed by the contents of the \n' +
+      'DE register pair. Then both of these registers, and the BC (Byte Counter), are decre-\n' +
+      'mented. If decrementing causes BC to go to 0, the instruction is terminated. If BC is not 0, \n' +
+      'the program counter is decremented by two and the instruction is repeated. Interrupts are \n' +
+      'recognized and two refresh cycles execute after each data transfer. \n' +
+      'When the BC is set to 0, prior to instruction execution, the instruction loops through \n' +
+      '64 KB.\n' +
+      'For BC ≠ 0:\n',
+    example: 'The HL register pair contains 1114h, the DE register pair contains 2225h, the BC register \n' +
+      '0003h, and memory locations contain the following data.pair contains \n' +
+      '(1114h)         contains            A5h\t(2225h)         contains                    C5h\n' +
+      '(1113h)         contains            36h            (2224h)         contains                    59h\n' +
+      '(1112h)         contains            88h            (2223h)         contains                    66h\n' +
+      'Upon the execution of an LDDR instruction, the contents of the register pairs and memory \n' +
+      'locations now contain:\n' +
+      'HL             contains\t1111h\n' +
+      'DE            contains            2222h\n' +
+      'DC            contains            0000h\n' +
+      '(1114h)         contains            A5h            (2225h)         contains                    A5h\n' +
+      '(1113h)         contains            36h            (2224h)         contains                    36h\n' +
+      '(1112h)         contains            88h            (2223h)         contains                    88h\n'
+  },
+  CPI: {
+    page: '138',
+    operation: 'CPI',
+    opCode: 'CPI',
+    effect: 'A – (HL), HL ← HL +1, BC ← BC – 1',
+    operands: 'None.',
+    desc: 'The contents of the memory location addressed by the HL register is compared with the \n' +
+      'contents of the Accumulator. With a true compare, a condition bit is set. Then HL is incre-\n' +
+      'mented and the Byte Counter (register pair BC) is decremented.\n',
+    example: 'If the HL register pair contains 1111h, memory location 1111h contains 3Bh, the Accu-\n' +
+      '3Bh, and the Byte Counter contains 0001h. Upon the execution of a CPI mulator contains \n' +
+      '0000h, the HL register pair contains 1112h, the Z instruction, the Byte Counter contains \n' +
+      'flag in the F register is set, and the P/V flag in the F Register is reset. There is no effect on \n' +
+      '1111h.the contents of the Accumulator or to address\n'
+  },
+  CPIR: {
+    page: '139',
+    operation: 'CPIR',
+    opCode: 'CPIR',
+    effect: 'A – (HL), HL ← HL+1, BC ← BC – 1',
+    operands: 'None.',
+    desc: 'The contents of the memory location addressed by the HL register pair is compared with \n' +
+      'the contents of the Accumulator. During a compare operation, a condition bit is set. HL is \n' +
+      'incremented and the Byte Counter (register pair BC) is decremented. If decrementing \n' +
+      'causes BC to go to 0 or if A = (HL), the instruction is terminated. If BC is not 0 and A ≠ \n' +
+      '(HL), the program counter is decremented by two and the instruction is repeated. Inter-\n' +
+      'rupts are recognized and two refresh cycles are executed after each data transfer.\n' +
+      'If BC is set to 0 before instruction execution, the instruction loops through 64 KB if no \n' +
+      'match is found.\n' +
+      'For BC ≠ 0 and A ≠ (HL):\n',
+    example: 'If the HL register pair contains 1111h, the Accumulator contains F3h, the Byte Counter \n' +
+      '0007h, and memory locations contain the following data.contains \n' +
+      '(1111h)             contains                52h\n' +
+      '(1112h)             contains                00h\n' +
+      '(1113h)             contains                F3h\n' +
+      '1114h, the Byte Upon the execution of a CPIR instruction, register pair HL contains \n' +
+      '0004h, the P/V flag in the F Register is set, and the Z flag in the F Reg-Counter contains \n' +
+      'ister is set.\n'
+  },
+  CPD: {
+    page: '141',
+    operation: 'CPD',
+    opCode: 'CPD',
+    effect: 'A – (HL), HL ← HL – 1, BC ← BC – 1',
+    operands: 'None.',
+    desc: 'The contents of the memory location addressed by the HL register pair is compared with \n' +
+      'the contents of the Accumulator. During a compare operation, a condition bit is set. The \n' +
+      'HL and Byte Counter (register pair BC) are decremented.\n',
+    example: 'If the HL register pair contains 1111h, memory location 1111h contains 3Bh, the Accu-\n' +
+      '3Bh, and the Byte Counter contains 0001h. Upon the execution of a mulator contains \n' +
+      '0000h, the HL register pair contains 1110h, CPD instruction, the Byte Counter contains \n' +
+      'the flag in the F Register is set, and the P/V flag in the F Register is reset. There is no \n' +
+      '1111h.effect on the contents of the Accumulator or address\n'
+  },
+  CPDR: {
+    page: '142',
+    operation: 'CPDR',
+    opCode: 'CPDR',
+    effect: 'A – (HL), HL ← HL – 1, BC ← BC – 1',
+    operands: 'None.',
+    desc: 'The contents of the memory location addressed by the HL register pair is compared with \n' +
+      'the contents of the Accumulator. During a compare operation, a condition bit is set. The \n' +
+      'HL and Byte Counter (BC) Register pairs are decremented. If decrementing allows the BC \n' +
+      'to go to 0 or if A = (HL), the instruction is terminated. If BC is not 0 and A = (HL), the \n' +
+      'program counter is decremented by two and the instruction is repeated. Interrupts are rec-\n' +
+      'ognized and two refresh cycles execute after each data transfer. When the BC is set to 0, \n' +
+      'prior to instruction execution, the instruction loops through 64 KB if no match is found.\n' +
+      'For BC ≠ 0 and A ≠ (HL):\n',
+    example: 'The HL register pair contains 1118h, the Accumulator contains F3h, the Byte Counter \n' +
+      '0007h, and memory locations contain the following data.contains \n' +
+      '(1118h)             contains                52h\n' +
+      '(1117h)             contains                00h\n' +
+      '(1116h)             contains                F3h\n' +
+      '1115h, the Byte Upon the execution of a CPDR instruction, register pair HL contains \n' +
+      '0004h, the P/V flag in the F Register is set, and the Z flag in the F Reg-Counter contains \n' +
+      'ister is set.\n' +
+      '8-Bit Arithmetic Group\n' +
+      'The following 8-bit arithmetic group instructions are each described in this section. Sim-\n' +
+      'ply click to jump to an instruction’s description to learn more.\n' +
+      ' – see page 145ADD A, r\n' +
+      ' – see page 147ADD A, n\n' +
+      ' – see page 148ADD A, (HL)\n' +
+      ' – see page 149ADD A, (IX + d)\n' +
+      ' – see page 150ADD A, (IY + d)\n' +
+      ' – see page 151ADC A, s\n' +
+      ' – see page 153SUB s\n' +
+      ' – see page 155SBC A, s\n' +
+      ' – see page 157AND s\n' +
+      ' – see page 159OR s\n' +
+      ' – see page 161XOR s\n' +
+      ' – see page 163CP s\n' +
+      ' – see page 165INC r\n' +
+      ' – see page 167INC (HL)\n' +
+      ' – see page 168INC (IX+d)\n' +
+      ' – see page 169INC (IY+d)\n' +
+      ' – see page 170DEC m\n'
+  },
+  'ADD A, r': {
+    page: '145',
+    operation: 'ADD A, r',
+    opCode: 'ADD',
+    effect: 'A ← A + r',
+    operands: 'A, r',
+    desc: 'The contents of register r are added to the contents of the Accumulator, and the result is \n' +
+      'stored in the Accumulator. The r symbol identifies the registers A, B, C, D, E, H, or L, \n' +
+      'assembled as follows in the object code:\n' +
+      'Register\tr\n' +
+      'A111\n' +
+      'B000\n' +
+      'C001\n' +
+      'D010\n' +
+      'E011\n' +
+      'H100\n' +
+      'L101\n',
+    example: 'If the Accumulator contains 44h and Register C contains 11h, then upon the execution of \n' +
+      '55h.an ADD A, C instruction, the Accumulator contains\n'
+  },
+  'ADD A, n': {
+    page: '147',
+    operation: 'ADD A, n',
+    opCode: 'ADD',
+    effect: 'A ← A + n',
+    operands: 'A, n',
+    desc: 'The n integer is added to the contents of the Accumulator, and the results are stored in the \n' +
+      'Accumulator.\n',
+    example: 'If the Accumulator contains 23h, then upon the execution of an ADD A, 33h instruction, \n' +
+      '56h.the Accumulator contains\n'
+  },
+  'ADD A, (HL)': {
+    page: '148',
+    operation: 'ADD A, (HL)',
+    opCode: 'ADD',
+    effect: 'A ← A + (HL)',
+    operands: 'A, (HL)',
+    desc: 'The byte at the memory address specified by the contents of the HL register pair is added \n' +
+      'to the contents of the Accumulator, and the result is stored in the Accumulator.\n',
+    example: 'If the Accumulator contains A0h, register pair HL contains 2323h, and memory location \n' +
+      '2323h contains byte 08h, then upon the execution of an ADD A, (HL) instruction, the \n' +
+      'A8h.Accumulator contains\n'
+  },
+  'ADD A, (IX + d)': {
+    page: '149',
+    operation: 'ADD A, (IX + d)',
+    opCode: 'ADD',
+    effect: 'A ← A + (IX+d)',
+    operands: 'A, (IX + d)',
+    desc: 'The contents of the Index (register pair IX) Register is added to a two’s complement dis-\n' +
+      'placement d to point to an address in memory. The contents of this address is then added to \n' +
+      'the contents of the Accumulator and the result is stored in the Accumulator.\n',
+    example: 'If the Accumulator contains 11h, Index Register IX contains 1000h, and memory location \n' +
+      '1005h contains 22h, then upon the execution of an ADD A, (IX + 5h) instruction, the \n' +
+      '33h.Accumulator contains\n'
+  },
+  'ADD A, (IY + d)': {
+    page: '150',
+    operation: 'ADD A, (IY + d)',
+    opCode: 'ADD',
+    effect: 'A ← A + (IY+d)',
+    operands: 'A, (IY + d)',
+    desc: 'The contents of the Index (register pair IY) Register is added to a two’s complement dis-\n' +
+      'placement d to point to an address in memory. The contents of this address is then added to \n' +
+      'the contents of the Accumulator, and the result is stored in the Accumulator.\n',
+    example: 'If the Accumulator contains 11h, Index Register IY contains 1000h, and memory location \n' +
+      '1005h contains 22h, then upon the execution of an ADD A, (IY + 5h) instruction, the \n' +
+      '33h.Accumulator contains\n'
+  },
+  'ADC A, s': {
+    page: '151',
+    operation: 'ADC A, s',
+    opCode: 'ADC',
+    effect: 'A ← A + s + CY',
+    operands: 'A, s',
+    desc: 'The s operand, along with the Carry Flag (C in the F Register) is added to the contents of \n' +
+      'the Accumulator, and the result is stored in the Accumulator.\n',
+    example: 'If the Accumulator contents are 16h, the Carry Flag is set, the HL register pair contains \n' +
+      '6666h, and address 6666h contains 10h, then upon the execution of an ADC A, (HL) \n' +
+      '27h.instruction, the Accumulator contains\n'
+  },
+  'SUB s': {
+    page: '153',
+    operation: 'SUB s',
+    opCode: 'SUB',
+    effect: 'A ← A – s',
+    operands: 's',
+    desc: 'The s operand is subtracted from the contents of the Accumulator, and the result is stored \n' +
+      'in the Accumulator.\n',
+    example: 'If the Accumulator contents are 29h, and the D Register contains 11h, then upon the exe-\n' +
+      '18h.cution of a SUB D instruction, the Accumulator contains\n'
+  },
+  'SBC A, s': {
+    page: '155',
+    operation: 'SBC A, s',
+    opCode: 'SBC',
+    effect: 'A ← A – s – CY',
+    operands: 'A, s',
+    desc: 'The s operand, along with the Carry flag (C in the F Register) is subtracted from the con-\n' +
+      'tents of the Accumulator, and the result is stored in the Accumulator.\n',
+    example: 'If the Accumulator contains 16h, the carry flag is set, the HL register pair contains 3433h, \n' +
+      '3433h contains 05h, then upon the execution of an SBC A, (HL) instruction, and address \n' +
+      '10h.the Accumulator contains\n'
+  },
+  'AND s': {
+    page: '157',
+    operation: 'AND s',
+    opCode: 'AND',
+    effect: 'A ← A ˄ s',
+    operands: 's',
+    desc: 'A logical AND operation is performed between the byte specified by the s operand and the \n' +
+      'byte contained in the Accumulator; the result is stored in the Accumulator.\n',
+    example: 'If Register B contains 7Bh (0111 1011) and the Accumulator contains C3h (1100 0011), \n' +
+      '43h (0100 then upon the execution of an AND B instruction, the Accumulator contains \n' +
+      '0011).\n'
+  },
+  'OR s': {
+    page: '159',
+    operation: 'OR s',
+    opCode: 'OR',
+    effect: 'A ← A ˅ s ',
+    operands: 's',
+    desc: 'A logical OR operation is performed between the byte specified by the s operand and the \n' +
+      'byte contained in the Accumulator; the result is stored in the Accumulator.\n',
+    example: 'If the H Register contains 48h (0100 0100), and the Accumulator contains 12h (0001 \n' +
+      '0010), then upon the execution of an OR H instruction, the Accumulator contains 5Ah \n' +
+      '0101 1010).(\n'
+  },
+  'XOR s': {
+    page: '161',
+    operation: 'XOR s',
+    opCode: 'XOR',
+    effect: 'A ← A  ⊕ s ',
+    operands: 's',
+    desc: 'The logical exclusive-OR operation is performed between the byte specified by the s oper-\n' +
+      'and and the byte contained in the Accumulator; the result is stored in the Accumulator.\n',
+    example: 'If the Accumulator contains 96h (1001 0110), then upon the execution of an XOR 5Dh \n' +
+      '(5Dh = 0101 1101) instruction, the Accumulator contains CBh (1100 1011).\n'
+  },
+  'CP s': {
+    page: '163',
+    operation: 'CP s',
+    opCode: 'CP',
+    effect: 'A – s',
+    operands: 's',
+    desc: 'The contents of the s operand are compared with the contents of the Accumulator. If there \n' +
+      'is a true compare, the Z flag is set. The execution of this instruction does not affect the \n' +
+      'contents of the Accumulator.\n',
+    example: 'If the Accumulator contains 63h, the HL register pair contains 6000h, and memory loca-\n' +
+      '6000h contains 60h, the instruction CP (HL) results in the PN flag in the F Register tion \n' +
+      'resetting.\n'
+  },
+  'INC r': {
+    page: '165',
+    operation: 'INC r',
+    opCode: 'INC',
+    effect: 'r ← r + 1',
+    operands: 'r',
+    desc: 'Register r is incremented and register r identifies any of the registers A, B, C, D, E, H, or \n' +
+      'L, assembled as follows in the object code.\n' +
+      'Register\tr\n' +
+      'A\t111\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n',
+    example: 'If the D Register contains 28h, then upon the execution of an INC D instruction, the D \n' +
+      '29h.Register contains\n'
+  },
+  'INC (HL)': {
+    page: '167',
+    operation: 'INC (HL)',
+    opCode: 'INC',
+    effect: '(HL) ← (HL) + 1',
+    operands: '(HL)',
+    desc: 'The byte contained in the address specified by the contents of the HL register pair is incre-\n' +
+      'mented.\n',
+    example: 'If the HL register pair contains 3434h and address 3434h contains 82h, then upon the \n' +
+      '3434h contains 83h.execution of an INC (HL) instruction, memory location\n'
+  },
+  'INC (IX+d)': {
+    page: '168',
+    operation: 'INC (IX+d)',
+    opCode: 'INC',
+    effect: '(IX+d) ← (IX+d) + 1',
+    operands: '(IX+d)',
+    desc: 'The contents of Index Register IX (register pair IX) are added to the two’s-complement \n' +
+      'displacement integer, d, to point to an address in memory. The contents of this address are \n' +
+      'then incremented.\n',
+    example: 'If Index Register pair IX contains 2020h and memory location 2030h contains byte 34h, \n' +
+      '10h) instruction, memory location 2030h con-then upon the execution of an INC (IX+\n' +
+      '35h.tains\n'
+  },
+  'INC (IY+d)': {
+    page: '169',
+    operation: 'INC (IY+d)',
+    opCode: 'INC',
+    effect: '(lY+d) ← (lY+d) + 1',
+    operands: '(lY+d)',
+    desc: 'The contents of Index Register IY (register pair IY) are added to the two’s-complement \n' +
+      'displacement integer, d, to point to an address in memory. The contents of this address are \n' +
+      'then incremented.\n',
+    example: 'If Index Register IY are 2020h and memory location 2030h contains byte 34h, then upon \n' +
+      '10h) instruction, memory location 2030h contains 35h.the execution of an INC (IY+\n'
+  },
+  'DEC m': {
+    page: '170',
+    operation: 'DEC m',
+    opCode: 'DEC',
+    effect: 'm ← m – 1',
+    operands: 'm',
+    desc: 'The byte specified by the m operand is decremented.\n',
+    example: 'If the D Register contains byte 2Ah, then upon the execution of a DEC D instruction, the D \n' +
+      '29h.Register contains\n' +
+      'General-Purpose Arithmetic and CPU \n' +
+      'Control Groups\n' +
+      'The following general-purpose arithmetic and CPU control group instructions are each \n' +
+      'described in this section. Simply click to jump to an instruction’s description to learn \n' +
+      'more.\n' +
+      ' – see page 173DAA\n' +
+      ' – see page 175CPL\n' +
+      ' – see page 176NEG\n' +
+      ' – see page 178CCF\n' +
+      ' – see page 179SCF\n' +
+      ' – see page 180NOP\n' +
+      ' – see page 181HALT\n' +
+      ' – see page 182DI\n' +
+      ' – see page 183EI\n' +
+      ' – see page 184IM 0\n' +
+      ' – see page 185IM 1\n' +
+      ' – see page 186IM 2\n'
+  },
+  DAA: {
+    page: '173',
+    operation: 'DAA',
+    opCode: 'DAA',
+    effect: '@',
+    operands: '00100\t1\t11',
+    desc: 'This instruction conditionally adjusts the Accumulator for BCD addition and subtraction \n' +
+      'operations. For addition (ADD, ADC, INC) or subtraction (SUB, SBC, DEC, NEG), the \n' +
+      'following table indicates the operation being performed:\n' +
+      'Hex Value Hex Value \n' +
+      'NumberIn Lower In Upper \n' +
+      'Digit\tAdded To \tC AfterDigit \tH BeforeC Before\n' +
+      '(Bits 3–0)\tByte\tDAA(Bits 7–4)\tDAADAAOperation\n' +
+      '09–000–900 0\n' +
+      '0\t0–8\t0\tA–F\t06\t0\n' +
+      '00–910–306 0\n' +
+      'ADD\t0\tA–F\t0\t0–9\t60\t1\n' +
+      'ADC\t0\t9–F\t0\tA–F\t66\t1\n' +
+      'INC\t0\tA–F\t1\t0–3\t66\t1\n' +
+      '10–200–960 1\n' +
+      '1\t0–2\t0\tA–F\t66\t1\n' +
+      '10–310–366 1\n' +
+      'SUB\t0\t0–9\t0\t0–9\t00\t0\n' +
+      'SBC\t0\t0–8\t1\t6–F\tFA\t0\n' +
+      'DEC\t1\t7–F\t0\t0–9\tA0\t1\n' +
+      'NEG\t1\t6–7\t1\t6–F\t9A\t1\n',
+    example: 'An addition operation is performed between 15 (BCD) and 27 (BCD); simple decimal \n' +
+      'arithmetic provides the following result:\n' +
+      '15\n' +
+      ' 27+\n' +
+      '42\n' +
+      'The binary representations are added in the Accumulator according to standard binary \n' +
+      'arithmetic, as follows:\n' +
+      '0001\t0101\n' +
+      '0111+ 0010\n' +
+      '0011\t1100\t= 3C\n' +
+      'The sum is ambiguous. The DAA instruction adjusts this result so that the correct BCD \n' +
+      'representation is obtained, as follows:\n' +
+      '0011\t1100\n' +
+      '0110+ 0000\n' +
+      '0100\t0010\t= 42\n'
+  },
+  CPL: {
+    page: '175',
+    operation: 'CPL',
+    opCode: 'CPL',
+    effect: 'A ← A',
+    operands: '00110\t1\t11',
+    desc: 'The contents of the Accumulator (Register A) are inverted (one’s complement).\n',
+    example: 'If the Accumulator contains 1011 0100, then upon the execution of a CPL instruction, the \n' +
+      '0100 1011.Accumulator contains\n'
+  },
+  NEG: {
+    page: '176',
+    operation: 'NEG',
+    opCode: 'NEG',
+    effect: 'A ← 0 – A',
+    operands: '11110\t1\t01',
+    desc: 'The contents of the Accumulator are negated (two’s complement). This method is the \n' +
+      'same as subtracting the contents of the Accumulator from zero. \n' +
+      'Note:The 80h address remains unchanged.\n',
+    example: 'The Accumulator contains the following data:\n' +
+      '10011\t0\t00\n' +
+      'Upon the execution of a NEG instruction, the Accumulator contains:\n' +
+      '01110\t0\t00\n'
+  },
+  CCF: {
+    page: '178',
+    operation: 'CCF',
+    opCode: 'CCF',
+    effect: 'CY ← CY',
+    operands: '00111\t1\t11',
+    desc: 'The Carry flag in the F Register is inverted.\n',
+    example: 'Condition Bits Affected\n' +
+      'S is not affected.\n' +
+      'Z is not affected.\n' +
+      'H, previous carry is copied.\n' +
+      'P/V is not affected.\n' +
+      'N is reset.\n' +
+      'C is set if CY was 0 before operation; otherwise, it is reset.\n'
+  },
+  SCF: {
+    page: '179',
+    operation: 'SCF',
+    opCode: 'SCF',
+    effect: 'CY ← 1',
+    operands: '00101\t1\t11',
+    desc: 'The Carry flag in the F Register is set.\n',
+    example: 'Condition Bits Affected\n' +
+      'S is not affected.\n' +
+      'Z is not affected.\n' +
+      'H is reset.\n' +
+      'P/V is not affected.\n' +
+      'N is reset.\n' +
+      'C is set.\n'
+  },
+  NOP: {
+    page: '180',
+    operation: 'NOP',
+    opCode: 'NOP',
+    effect: '—',
+    operands: '00000\t0\t00',
+    desc: 'The CPU performs no operation during this machine cycle.\n',
+    example: 'Condition Bits Affected\nNone.\n'
+  },
+  HALT: {
+    page: '181',
+    operation: 'HALT',
+    opCode: 'HALT',
+    effect: '—',
+    operands: '01101\t1\t10',
+    desc: 'The HALT instruction suspends CPU operation until a subsequent interrupt or reset is \n' +
+      'received. While in the HALT state, the processor executes NOPs to maintain memory \n' +
+      'refresh logic.\n',
+    example: 'Condition Bits Affected\nNone.\n'
+  },
+  DI: {
+    page: '182',
+    operation: 'DI',
+    opCode: 'DI',
+    effect: 'IFF ← 0',
+    operands: '11101\t0\t11',
+    desc: 'DI disables the maskable interrupt by resetting the interrupt enable flip-flops (IFF1 and \n' +
+      'IFF2). \n' +
+      'Note:This instruction disables the maskable interrupt during its execution.\n',
+    example: 'When the CPU executes the instruction DI the maskable interrupt is disabled until it is \n' +
+      'subsequently re-enabled by an EI instruction. The CPU does not respond to an Interrupt \n' +
+      'Request (INT) signal.\n'
+  },
+  EI: {
+    page: '183',
+    operation: 'EI',
+    opCode: 'EI',
+    effect: 'IFF ← 1',
+    operands: '11111\t0\t11',
+    desc: 'The enable interrupt instruction sets both interrupt enable flip flops (IFFI and IFF2) to a \n' +
+      'logic 1, allowing recognition of any maskable interrupt. \n' +
+      'Note:During the execution of this instruction and the following instruction, maskable interrupts \n' +
+      'are disabled.\n',
+    example: 'When the CPU executes an EI RETI instruction, the maskable interrupt is enabled then \n' +
+      'upon the execution of an the RETI instruction.\n'
+  },
+  'IM 0': {
+    page: '184',
+    operation: 'IM 0',
+    opCode: 'IM',
+    effect: 'Set Interrupt Mode 0',
+    operands: '0',
+    desc: 'The IM 0 instruction sets Interrupt Mode 0. In this mode, the interrupting device can insert \n' +
+      'any instruction on the data bus for execution by the CPU. The first byte of a multi-byte \n' +
+      'instruction is read during the interrupt acknowledge cycle. Subsequent bytes are read in by \n' +
+      'a normal memory read sequence.\n',
+    example: 'Condition Bits Affected\nNone.\n'
+  },
+  'IM 1': {
+    page: '185',
+    operation: 'IM 1',
+    opCode: 'IM',
+    effect: 'Set Interrupt Mode 1',
+    operands: '1',
+    desc: 'The IM 1 instruction sets Interrupt Mode 1. In this mode, the processor responds to an \n' +
+      '0038h.interrupt by executing a restart at address \n',
+    example: 'Condition Bits Affected\nNone.\n'
+  },
+  'IM 2': {
+    page: '186',
+    operation: 'IM 2',
+    opCode: 'IM',
+    effect: 'Set Interrupt Mode 2',
+    operands: '2',
+    desc: 'The IM 2 instruction sets the vectored Interrupt Mode 2. This mode allows an indirect call \n' +
+      'to any memory location by an 8-bit vector supplied from the peripheral device. This vector \n' +
+      'then becomes the least-significant eight bits of the indirect pointer, while the I Register in \n' +
+      'the CPU provides the most-significant eight bits. This address points to an address in a \n' +
+      'vector table that is the starting address for the interrupt service routine.\n',
+    example: 'Condition Bits Affected\n' +
+      'None.\n' +
+      '16-Bit Arithmetic Group\n' +
+      'The following 16-bit arithmetic group instructions are each described in this section. Sim-\n' +
+      'ply click to jump to an instruction’s description to learn more.\n' +
+      ' – see page 188ADD HL, ss\n' +
+      ' – see page 190ADC HL, ss\n' +
+      ' – see page 192SBC HL, ss\n' +
+      ' – see page 194ADD IX, pp\n' +
+      ' – see page 196ADD IY, rr\n' +
+      ' – see page 198INC ss\n' +
+      ' – see page 199INC IX\n' +
+      ' – see page 200INC IY\n' +
+      ' – see page 201DEC ss\n' +
+      ' – see page 202DEC IX\n' +
+      ' – see page 203DEC IY\n'
+  },
+  'ADD HL, ss': {
+    page: '188',
+    operation: 'ADD HL, ss',
+    opCode: 'ADD',
+    effect: 'HL ← HL + ss',
+    operands: 'HL, ss',
+    desc: 'The contents of register pair ss (any of register pairs BC, DE, HL, or SP) are added to the \n' +
+      'contents of register pair HL and the result is stored in HL. In the assembled object code, \n' +
+      'operand ss is specified as follows:\n' +
+      'Register\n' +
+      'Pair\tss\n' +
+      'BC\t00\n' +
+      'DE\t01\n' +
+      'HL\t10\n' +
+      'SP\t11\n',
+    example: 'If register pair HL contains the integer 4242h and register pair DE contains 1111h, then \n' +
+      '5353h.upon the execution of an ADD HL, DE instruction, the HL register pair contains\n'
+  },
+  'ADC HL, ss': {
+    page: '190',
+    operation: 'ADC HL, ss',
+    opCode: 'ADC',
+    effect: 'HL ← HL + ss + CY',
+    operands: 'HL, ss',
+    desc: 'The contents of register pair ss (any of register pairs BC, DE, HL, or SP) are added with \n' +
+      'the Carry flag (C flag in the F Register) to the contents of register pair HL, and the result is \n' +
+      'stored in HL. In the assembled object code, operand ss is specified as follows:\n' +
+      'Register \n' +
+      'Pair\tss\n' +
+      'BC\n' +
+      '00\n' +
+      'DE\n' +
+      '01\n' +
+      'HL\n' +
+      '10\n' +
+      'SP\n' +
+      '11\n',
+    example: 'If register pair BC contains 2222h, register pair HL contains 5437h, and the Carry Flag is \n' +
+      '765Ah.set, then upon the execution of an ADC HL, BC instruction, HL contains\n'
+  },
+  'SBC HL, ss': {
+    page: '192',
+    operation: 'SBC HL, ss',
+    opCode: 'SBC',
+    effect: 'HL ← HL – ss – CY',
+    operands: 'HL, ss',
+    desc: 'The contents of the register pair ss (any of register pairs BC, DE, HL, or SP) and the Carry \n' +
+      'Flag (C flag in the F Register) are subtracted from the contents of register pair HL, and the \n' +
+      'result is stored in HL. In the assembled object code, operand ss is specified as follows:\n' +
+      'Register \n' +
+      'Pair\tss\n' +
+      'BC\n' +
+      '00\n' +
+      'DE\n' +
+      '01\n' +
+      'HL\n' +
+      '10\n' +
+      'SP\n' +
+      '11\n',
+    example: 'If the HL register pair contains 9999h, register pair DE contains 1111h, and the Carry \n' +
+      'n SBC HL, DE instruction, HL contains 8887h.flag is set, then upon the execution of a\n'
+  },
+  'ADD IX, pp': {
+    page: '194',
+    operation: 'ADD IX, pp',
+    opCode: 'ADD',
+    effect: 'IX ← IX + pp',
+    operands: 'IX, pp',
+    desc: 'The contents of register pair pp (any of register pairs BC, DE, IX, or SP) are added to the \n' +
+      'contents of Index Register IX, and the results are stored in IX. In the assembled object \n' +
+      'code, operand pp is specified as follows:\n' +
+      'Register \n' +
+      'Pair\tss\n' +
+      'BC\n' +
+      '00\n' +
+      'DE\n' +
+      '01\n' +
+      'IX\n' +
+      '10\n' +
+      'SP\n' +
+      '11\n',
+    example: 'If Index Register IX contains 333h and register pair BC contains 5555h, then upon the \n' +
+      '8888h.execution of an ADD IX, BC instruction, IX contains\n'
+  },
+  'ADD IY, rr': {
+    page: '196',
+    operation: 'ADD IY, rr',
+    opCode: 'ADD',
+    effect: 'IY ← IY + rr',
+    operands: 'IY, rr',
+    desc: 'The contents of register pair rr (any of register pairs BC, DE, IY, or SP) are added to the \n' +
+      'contents of Index Register IY, and the result is stored in IY. In the assembled object code, \n' +
+      'the rr operand is specified as follows:\n' +
+      'Register \n' +
+      'Pair\tss\n' +
+      'BC\n' +
+      '00\n' +
+      'DE\n' +
+      '01\n' +
+      'IY\n' +
+      '10\n' +
+      'SP\n' +
+      '11\n',
+    example: 'If Index Register IY contains 333h and register pair BC contains 555h, then upon the exe-\n' +
+      '8888h.cution of an ADD IY, BC instruction, IY contains\n'
+  },
+  'INC ss': {
+    page: '198',
+    operation: 'INC ss',
+    opCode: 'INC',
+    effect: 'ss ← ss + 1',
+    operands: 'ss',
+    desc: 'The contents of register pair ss (any of register pairs BC, DE, HL, or SP) are incremented. \n' +
+      'In the assembled object code, operand ss is specified as follows:\n' +
+      'Register \n' +
+      'Pair\tss\n' +
+      'BC\n' +
+      '00\n' +
+      'DE\n' +
+      '01\n' +
+      'HL\n' +
+      '10\n' +
+      'SP\n' +
+      '11\n',
+    example: 'If the register pair contains 1000h, then upon the execution of an INC HL instruction, HL \n' +
+      '1001h.contains\n'
+  },
+  'INC IX': {
+    page: '199',
+    operation: 'INC IX',
+    opCode: 'INC',
+    effect: 'IX ← IX + 1',
+    operands: 'IX',
+    desc: 'The contents of Index Register IX are incremented.\n',
+    example: 'If Index Register IX contains the integer 3300h, then upon the execution of an INC IX \n' +
+      '3301h.instruction, Index Register IX contains\n'
+  },
+  'INC IY': {
+    page: '200',
+    operation: 'INC IY',
+    opCode: 'INC',
+    effect: 'IY ← IY + 1',
+    operands: 'IY',
+    desc: 'The contents of Index Register IY are incremented.\n',
+    example: 'If the index register contains 2977h, then upon the execution of an INC IY instruction, \n' +
+      '2978h.Index Register IY contains\n'
+  },
+  'DEC ss': {
+    page: '201',
+    operation: 'DEC ss',
+    opCode: 'DEC',
+    effect: 'ss ← ss – 1',
+    operands: 'ss',
+    desc: 'The contents of register pair ss (any of the register pairs BC, DE, HL, or SP) are decre-\n' +
+      'mented. In the assembled object code, operand ss is specified as follows:\n' +
+      'Register\n' +
+      'Pair\tss\n' +
+      'BC\n' +
+      '00\n' +
+      'DE\n' +
+      '01\n' +
+      'HL\n' +
+      '10\n' +
+      'SP\n' +
+      '11\n',
+    example: 'If register pair HL contains 1001h, then upon the execution of an DEC HL instruction, HL \n' +
+      '1000h.contains\n'
+  },
+  'DEC IX': {
+    page: '202',
+    operation: 'DEC IX',
+    opCode: 'DEC',
+    effect: 'IX ← IX – 1',
+    operands: 'IX',
+    desc: 'The contents of Index Register IX are decremented.\n',
+    example: 'If Index Register IX contains 2006h, then upon the execution of a DEC IX instruction, \n' +
+      '2005h.Index Register IX contains\n'
+  },
+  'DEC IY': {
+    page: '203',
+    operation: 'DEC IY',
+    opCode: 'DEC',
+    effect: 'IY ← IY– 1',
+    operands: 'IY',
+    desc: 'The contents of Index Register IY are decremented.\n',
+    example: 'If Index Register IY contains 7649h, then upon the execution of a DEC IY instruction, \n' +
+      '7648h.Index Register IY contains\n' +
+      'Rotate and Shift Group\n' +
+      'The following rotate and shift group instructions are each described in this section. Simply \n' +
+      'click to jump to an instruction’s description to learn more.\n' +
+      ' – see page 205RLCA\n' +
+      ' – see page 207RLA\n' +
+      ' – see page 209RRCA\n' +
+      ' – see page 211RRA\n' +
+      ' – see page 213RLC r\n' +
+      ' – see page 215RLC (HL)\n' +
+      ' – see page 217RLC (IX+d)\n' +
+      ' – see page 219RLC (IY+d)\n' +
+      ' – see page 221RL m\n' +
+      ' – see page 224RRC m\n' +
+      ' – see page 227RR m\n' +
+      ' – see page 230SLA m\n' +
+      ' – see page 233SRA m\n' +
+      ' – see page 236SRL m\n' +
+      ' – see page 238RLD\n' +
+      ' – see page 240RRD\n'
+  },
+  RLCA: {
+    page: '205',
+    operation: 'RLCA',
+    opCode: 'A',
+    effect: '70',
+    operands: 'RLCA',
+    desc: 'The contents of the Accumulator (Register A) are rotated left 1 bit position. The sign bit \n' +
+      '(bit 7) is copied to the Carry flag and also to bit 0. Bit 0 is the least-significant bit.\n',
+    example: 'The Accumulator contains the following data:\n' +
+      '76534\t2\t10\n' +
+      '10010\t0\t00\n' +
+      'Upon the execution of an RLCA instruction, the Accumulator and Carry flag contains:\n' +
+      'C\t76534\t2\t10\n' +
+      '1\n' +
+      '00001\t0\t01\n'
+  },
+  RLA: {
+    page: '207',
+    operation: 'RLA',
+    opCode: 'Operands',
+    effect: 'Op Code',
+    operands: '17',
+    desc: 'The contents of the Accumulator (Register A) are rotated left 1 bit position through the \n' +
+      'Carry flag. The previous contents of the Carry flag are copied to bit 0. Bit 0 is the least-\n' +
+      'significant bit.\n',
+    example: 'The Accumulator and the Carry flag contains the following data:\n' +
+      'C\t76534\t2\t10\n' +
+      '1\n' +
+      '01101\t1\t10\n' +
+      'Upon the execution of an RLA instruction, the Accumulator and the Carry flag contains:\n' +
+      'C\t76534\t2\t10\n' +
+      '0\n' +
+      '11110\t1\t01\n'
+  },
+  RRCA: {
+    page: '209',
+    operation: 'RRCA',
+    opCode: 'A',
+    effect: '7\t0',
+    operands: 'RRCA',
+    desc: 'The contents of the Accumulator (Register A) are rotated right 1 bit position. Bit 0 is cop-\n' +
+      'ied to the Carry flag and also to bit 7. Bit 0 is the least-significant bit.\n',
+    example: 'The Accumulator contains the following data.\n' +
+      '64532\t10\n' +
+      '7\n' +
+      '10\n' +
+      '00100\t0\n' +
+      'Upon the execution of an RRCA instruction, the Accumulator and the Carry flag now con-\n' +
+      'tain:\n' +
+      'C\n' +
+      '7\t64532\t10\n' +
+      '11\n' +
+      '000101\t0\n'
+  },
+  RRA: {
+    page: '211',
+    operation: 'RRA',
+    opCode: 'A',
+    effect: '7\t0',
+    operands: 'RRA',
+    desc: 'The contents of the Accumulator (Register A) are rotated right 1 bit position through the \n' +
+      'Carry flag. The previous contents of the Carry flag are copied to bit 7. Bit 0 is the least-\n' +
+      'significant bit.\n',
+    example: 'The Accumulator and the Carry Flag contain the following data:\n' +
+      'C76534\t2\t10\n' +
+      '0\n' +
+      '111\t0\t0\t00\t1\n' +
+      'Upon the execution of an RRA instruction, the Accumulator and the Carry flag now con-\n' +
+      'tain:\n' +
+      'C76534\t2\t10\n' +
+      '1\n' +
+      '011\t1\t0\t00\t0\n'
+  },
+  'RLC r': {
+    page: '213',
+    operation: 'RLC r',
+    opCode: 'Op Code',
+    effect: '70CY',
+    operands: 'Operand',
+    desc: 'The contents of register r are rotated left 1 bit position. The contents of bit 7 are copied to \n' +
+      'the Carry flag and also to bit 0. In the assembled object code, operand r is specified as fol-\n' +
+      'lows:\n' +
+      'Register\tr\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n' +
+      'A\t111\n',
+    example: 'Register r contains the following data.\n' +
+      '76534\t2\t10\n' +
+      '100\t0\t1\t00\t0\n' +
+      'Upon the execution of an RLC r instruction, register r and the Carry flag now contain:\n' +
+      '76534\t2\t10\n' +
+      'C\n' +
+      '1\n' +
+      '00001\t0\t01\n'
+  },
+  'RLC (HL)': {
+    page: '215',
+    operation: 'RLC (HL)',
+    opCode: '(HL)',
+    effect: '70',
+    operands: 'RLC',
+    desc: 'The contents of the memory address specified by the contents of register pair HL are \n' +
+      'rotated left 1 bit position. The contents of bit 7 are copied to the Carry flag and also to bit \n' +
+      '0. Bit 0 is the least-significant bit.\n',
+    example: 'The HL register pair contains 2828h and the contents of memory location 2828h are:\n' +
+      '76534\t2\t10\n' +
+      '10010\t0\t00\n' +
+      '2828h and the Carry Upon the execution of an RLC(HL) instruction, memory location \n' +
+      'flag now contain:\n' +
+      'C\t76534\t2\t10\n' +
+      '1\n' +
+      '00001\t0\t01\n'
+  },
+  'RLC (IX+d)': {
+    page: '217',
+    operation: 'RLC (IX+d)',
+    opCode: '(IX+d)',
+    effect: '70',
+    operands: 'RLC',
+    desc: 'The contents of the memory address specified by the sum of the contents of Index Register \n' +
+      'IX and the two’s-complement displacement integer, d, are rotated left 1 bit position. The \n' +
+      'contents of bit 7 are copied to the Carry flag and also to bit 0. Bit 0 is the least-significant \n' +
+      'bit.\n',
+    example: 'Index Register IX contains 1000h and memory location 1022h contains the following \n' +
+      'data.\n' +
+      '76534\t2\t10\n' +
+      '10010\t0\t00\n' +
+      '2h) instruction, memory location 1002h and the Upon the execution of an RLC (IX+\n' +
+      'Carry flag now contain:\n' +
+      'C\t76534\t2\t10\n' +
+      '1\n' +
+      '00001\t0\t01\n'
+  },
+  'RLC (IY+d)': {
+    page: '219',
+    operation: 'RLC (IY+d)',
+    opCode: '(IY+d)',
+    effect: '70',
+    operands: 'RLC',
+    desc: 'The contents of the memory address specified by the sum of the contents of Index Register \n' +
+      'IY and the two’s-complement displacement integer, d, are rotated left 1 bit position. The \n' +
+      'contents of bit 7 are copied to the Carry flag and also to bit 0. Bit 0 is the least-significant \n' +
+      'bit.\n',
+    example: 'Index Register IY contains 1000h and memory location 1002h contain the following \n' +
+      'data:\n' +
+      '76534\t2\t10\n' +
+      '10010\t0\t00\n' +
+      '2h) instruction, memory location 1002h and the Upon the execution of an RLC (IY+\n' +
+      'Carry flag now contain:\n' +
+      'C\t76534\t2\t10\n' +
+      '1\n' +
+      '00001\t0\t01\n'
+  },
+  'RL m': {
+    page: '221',
+    operation: 'RL m',
+    opCode: 'm',
+    effect: '70',
+    operands: 'RL',
+    desc: 'The contents of the m operand are rotated left 1 bit position. The contents of bit 7 are cop-\n' +
+      'ied to the Carry flag, and the previous contents of the Carry flag are copied to bit 0.\n',
+    example: 'The D Register and the Carry flag contain the following data.\n' +
+      'C\t76534\t2\t10\n' +
+      '0\n' +
+      '10010\t1\t11\n' +
+      'Upon the execution of an RL D instruction, the D Register and the Carry flag now contain:\n' +
+      'C\t76534\t2\t10\n' +
+      '1\n' +
+      '00011\t1\t10\n'
+  },
+  'RRC m': {
+    page: '224',
+    operation: 'RRC m',
+    opCode: 'Operand',
+    effect: 'Op Code',
+    operands: 'The m operand is any of r, (HL), (IX+d), or (lY+d), as defined for the analogous RLC ',
+    desc: 'The contents of the m operand are rotated right 1 bit position. The contents of bit 0 are \n' +
+      'copied to the Carry flag and also to bit 7. Bit 0 is the least-significant bit.\n',
+    example: 'Register A contains the following data.\n' +
+      '76534\t2\t10\n' +
+      '00101\t0\t01\n' +
+      'Upon the execution of an RRC A instruction, Register A and the Carry flag now contain:\n' +
+      '76534\t2\t10\n' +
+      'C\n' +
+      '1\n' +
+      '100\t1\t1\t00\t0\n'
+  },
+  'RR m': {
+    page: '227',
+    operation: 'RR m',
+    opCode: 'Operand',
+    effect: 'Op Code',
+    operands: 'The m operand is any of r, (HL), (IX+d), or (lY+d), as defined for the analogous RLC ',
+    desc: 'The contents of operand m are rotated right 1 bit position through the Carry flag. The con-\n' +
+      'tents of bit 0 are copied to the Carry flag and the previous contents of the Carry flag are \n' +
+      'copied to bit 7. Bit 0 is the least-significant bit.\n',
+    example: 'The HL register pair contains 4343h and memory location 4343h and the Carry flag con-\n' +
+      'tain the following data.\n' +
+      'C76534\t2\t10\n' +
+      '0\n' +
+      '101\t1\t1\t10\t1\n' +
+      '4343h and the Carry flag now Upon the execution of an RR (HL) instruction, location \n' +
+      'contain:\n' +
+      'C76534\t2\t10\n' +
+      '1\n' +
+      '011\t0\t1\t11\t0\n'
+  },
+  'SLA m': {
+    page: '230',
+    operation: 'SLA m',
+    opCode: 'm',
+    effect: '70',
+    operands: 'SLA',
+    desc: 'An arithmetic shift left 1 bit position is performed on the contents of operand m. The con-\n' +
+      'tents of bit 7 are copied to the Carry flag. Bit 0 is the least-significant bit.\n',
+    example: 'Register L contains the following data.\n' +
+      '76534\t2\t10\n' +
+      '10101\t0\t01\n' +
+      'Upon the execution of an SLA L instruction, Register L and the Carry flag now contain:\n' +
+      'C\t76534\t2\t10\n' +
+      '1\n' +
+      '01100\t0\t10\n'
+  },
+  'SRA m': {
+    page: '233',
+    operation: 'SRA m',
+    opCode: 'm',
+    effect: '7\t0',
+    operands: 'SRA',
+    desc: 'An arithmetic shift right 1 bit position is performed on the contents of operand m. The \n' +
+      'contents of bit 0 are copied to the Carry flag and the previous contents of bit 7 remain \n' +
+      'unchanged. Bit 0 is the least-significant bit.\n',
+    example: 'Index Register IX contains 1000h and memory location 1003h contains the following \n' +
+      'data.\n' +
+      '76534\t2\t10\n' +
+      '10111\t0\t00\n' +
+      'Upon the execution of an SRA (IX+3h) instruction, memory location 1003h and the \n' +
+      'Carry flag now contain:\n' +
+      'C76534\t2\t10\n' +
+      '0\n' +
+      '101\t1\t1\t10\t0\n'
+  },
+  'SRL m': {
+    page: '236',
+    operation: 'SRL m',
+    opCode: 'm',
+    effect: '7\t0\tCY',
+    operands: 'SRL',
+    desc: 'The contents of operand m are shifted right 1 bit position. The contents of bit 0 are copied \n' +
+      'to the Carry flag, and bit 7 is reset. Bit 0 is the least-significant bit.\n',
+    example: 'Register B contains the following data.\n' +
+      '76534\t2\t10\n' +
+      '10010\t1\t11\n' +
+      'Upon the execution of an SRL B instruction, Register B and the Carry flag now contain:\n' +
+      'C76534\t2\t10\n' +
+      '1\n' +
+      '001\t0\t0\t11\t1\n'
+  },
+  RLD: {
+    page: '238',
+    operation: 'RLD',
+    opCode: 'RLD',
+    effect: 'A7430\t7430',
+    operands: 'ED',
+    desc: 'The contents of the low-order four bits (bits 3, 2, 1, and 0) of the memory location (HL) \n' +
+      'are copied to the high-order four bits (7, 6, 5, and 4) of that same memory location; the \n' +
+      'previous contents of those high-order four bits are copied to the low-order four bits of the \n' +
+      'Accumulator (Register A); and the previous contents of the low-order four bits of the \n' +
+      'Accumulator are copied to the low-order four bits of memory location (HL). The contents \n' +
+      'of the high-order bits of the Accumulator are unaffected.\n' +
+      'Note:(HL) refers to the memory location specified by the contents of the HL register pair.\n',
+    example: 'The HL register pair contains 5000h and the Accumulator and memory location 5000h \n' +
+      'contain the following data.\n' +
+      '76534\t2\t10\n' +
+      'Accumulator01111\t0\t10\n' +
+      '76534\t2\t10\n' +
+      '(5000h)00101\t0\t01\n' +
+      '5000h Upon the execution of an RLD instruction, the Accumulator and memory location \n' +
+      'now contain:\n' +
+      '76534\t2\t10\n' +
+      'Accumulator01101\t0\t11\n' +
+      '76534\t2\t10\n' +
+      '(5000h)00011\t0\t10\n'
+  },
+  RRD: {
+    page: '240',
+    operation: 'RRD',
+    opCode: 'Op Code',
+    effect: 'A7430\t7430',
+    operands: 'Operands',
+    desc: 'The contents of the low-order four bits (bits 3, 2, 1, and 0) of memory location (HL) are \n' +
+      'copied to the low-order four bits of the Accumulator (Register A). The previous contents \n' +
+      'of the low-order four bits of the Accumulator are copied to the high-order four bits (7, 6, 5, \n' +
+      'and 4) of location (HL); and the previous contents of the high-order four bits of (HL) are \n' +
+      'copied to the low-order four bits of (HL). The contents of the high-order bits of the Accu-\n' +
+      'mulator are unaffected. \n' +
+      'Note:(HL) refers to the memory location specified by the contents of the HL register pair.\n',
+    example: 'The HL register pair contains 5000h and the Accumulator and memory location 5000h \n' +
+      'contain the following data.\n' +
+      '76534\t2\t10\n' +
+      'Accumulator10000\t1\t00\n' +
+      '76534\t2\t10\n' +
+      '00100\t0\t00\n' +
+      '(5000h)\n' +
+      '5000h Upon the execution of an RRD instruction, the Accumulator and memory location \n' +
+      'now contain:\n' +
+      '76534\t2\t10\n' +
+      'Accumulator10000\t0\t00\n' +
+      '76534\t2\t10\n' +
+      '01000\t0\t10\n' +
+      '(5000h)\n' +
+      'Bit Set, Reset, and Test Group\n' +
+      'The following bit set, reset, and test group instructions are each described in this section. \n' +
+      'Simply click to jump to an instruction’s description to learn more.\n' +
+      ' – see page 243BIT b, r\n' +
+      ' – see page 245BIT b, (HL)\n' +
+      ' – see page 247BIT b, (IX+d)\n' +
+      ' – see page 249BIT b, (IY+d)\n' +
+      ' – see page 251SET b, r\n' +
+      ' – see page 253SET b, (HL)\n' +
+      ' – see page 255SET b, (IX+d)\n' +
+      ' – see page 257SET b, (IY+d)\n' +
+      ' – see page 259RES b, m\n'
+  },
+  'BIT b, r': {
+    page: '243',
+    operation: 'BIT b, r',
+    opCode: 'BIT',
+    effect: 'Z ← rb',
+    operands: 'b, r',
+    desc: 'This instruction tests bit b in register r and sets the Z flag accordingly. In the assembled \n' +
+      'object code, operands b and r are specified as follows:\n' +
+      'Bit Tested\tb\tRegister\tr\n' +
+      '0\t000\tB\t000\n' +
+      '1\t001\tC\t001\n' +
+      '2\t010\tD\t010\n' +
+      '3\t011\tE\t011\n' +
+      '4\t100\tH\t100\n' +
+      '5\t101\tL\t101\n' +
+      '6\t110\tA\t111\n' +
+      '7\t111\n',
+    example: 'If bit 2 in Register B contains 0, then upon the execution of a BIT 2, B instruction, the Z \n' +
+      'flag in the F Register contains 1, and bit 2 in Register B remains at 0. Bit 0 in Register B is \n' +
+      'the least-significant bit.\n'
+  },
+  'BIT b, (HL)': {
+    page: '245',
+    operation: 'BIT b, (HL)',
+    opCode: 'BIT',
+    effect: 'Z ← (HL)b',
+    operands: 'b, (HL)',
+    desc: 'This instruction tests bit b in the memory location specified by the contents of the HL reg-\n' +
+      'ister pair and sets the Z flag accordingly. In the assembled object code, operand b is speci-\n' +
+      'fied as follows:\n' +
+      'Bit Tested\tb\n' +
+      '0\t000\n' +
+      '1\t001\n' +
+      '2\t010\n' +
+      '3\t011\n' +
+      '4\t100\n' +
+      '5\t101\n' +
+      '6\t110\n' +
+      '1\t111\n',
+    example: 'If the HL register pair contains 4444h, and bit 4 in the memory location 444h contains 1, \n' +
+      'then upon the execution of a BIT 4, (HL) instruction, the Z flag in the F Register contains \n' +
+      '4444h remains at 1. Bit 0 in memory location 4444h is 0, and bit 4 in memory location \n' +
+      'the least-significant bit.\n'
+  },
+  'BIT b, (IX+d)': {
+    page: '247',
+    operation: 'BIT b, (IX+d)',
+    opCode: 'BIT',
+    effect: 'Z ← (IX+d)b',
+    operands: 'b, (IX+d)',
+    desc: 'This instruction tests bit b in the memory location specified by the contents of register pair \n' +
+      'IX combined with the two’s complement displacement d and sets the Z flag accordingly. \n' +
+      'In the assembled object code, operand b is specified as follows:\n' +
+      'Bit Tested\tb\n' +
+      '0\t000\n' +
+      '1\t001\n' +
+      '2\t010\n' +
+      '3\t011\n' +
+      '4\t100\n' +
+      '5\t101\n' +
+      '6\t110\n' +
+      '7\t111\n',
+    example: 'If Index Register IX contains 2000h and bit 6 in memory location 2004h contains 1, then \n' +
+      '4h) instruction, the Z flag in the F Register contains a upon the execution of a BIT 6, (IX+\n' +
+      '2004h still contains a 1. Bit 0 in memory location 2004h 0 and bit 6 in memory location \n' +
+      'is the least-significant bit.\n'
+  },
+  'BIT b, (IY+d)': {
+    page: '249',
+    operation: 'BIT b, (IY+d)',
+    opCode: 'BIT',
+    effect: 'Z ← (IY+d)b',
+    operands: 'b, (lY+d)',
+    desc: 'This instruction tests bit b in the memory location specified by the contents of register pair \n' +
+      'IY combined with the two’s complement displacement d and sets the Z flag accordingly. \n' +
+      'In the assembled object code, operand b is specified as follows.\n' +
+      'Bit Tested\tb\n' +
+      '0\t000\n' +
+      '1\t001\n' +
+      '2\t010\n' +
+      '3\t011\n' +
+      '4\t100\n' +
+      '5\t101\n' +
+      '6\t110\n' +
+      '7\t111\n',
+    example: 'If Index Register contains 2000h and bit 6 in memory location 2004h contains a 1, then \n' +
+      '4h) instruction, the Z flag and the F Register still con-upon the execution of a BIT 6, (IY+\n' +
+      '2004h still contains a 1. Bit 0 in memory location tains a 0, and bit 6 in memory location \n' +
+      '2004h is the least-significant bit.\n'
+  },
+  'SET b, r': {
+    page: '251',
+    operation: 'SET b, r',
+    opCode: 'SET',
+    effect: 'rb ← 1',
+    operands: 'b, r',
+    desc: 'Bit b in register r (any of registers B, C, D, E, H, L, or A) is set. In the assembled object \n' +
+      'code, operands b and r are specified as follows:\n' +
+      'Bit\tb                  Register                   r\n' +
+      '0 \t000                      B                      000 \n' +
+      '1 \t001                     C                     001 \n' +
+      '2 \t010 D 010 \n' +
+      '3 \t011                      E                      011 \n' +
+      '4 \t100                     H                     100 \n' +
+      '5 \t101                      L                      101 \n' +
+      '6 \t110                      A                      111 \n' +
+      '7 \t111\n',
+    example: 'Upon the execution of a SET 4, A instruction, bit 4 in Register A is set. Bit 0 is the least-\n' +
+      'significant bit.\n'
+  },
+  'SET b, (HL)': {
+    page: '253',
+    operation: 'SET b, (HL)',
+    opCode: 'SET',
+    effect: '(HL)b ← 1',
+    operands: 'b, (HL)',
+    desc: 'Bit b in the memory location addressed by the contents of register pair HL is set. In the \n' +
+      'assembled object code, operand b is specified as follows:\n' +
+      'Bit Tested\tb\n' +
+      '0\t000\n' +
+      '1\t001\n' +
+      '2\t010\n' +
+      '3\t011\n' +
+      '4\t100\n' +
+      '5\t101\n' +
+      '6\t110\n' +
+      '7\t111\n',
+    example: 'If the HL register pair contains 3000h, then upon the execution of a SET 4, (HL) instruc-\n' +
+      '3000h is 1. Bit 0 in memory location 3000h is the least-sig-tion, bit 4 in memory location \n' +
+      'nificant bit.\n'
+  },
+  'SET b, (IX+d)': {
+    page: '255',
+    operation: 'SET b, (IX+d)',
+    opCode: 'SET',
+    effect: '(IX+d)b ← 1',
+    operands: 'b, (IX+d)',
+    desc: 'Bit b in the memory location addressed by the sum of the contents of the IX register pair \n' +
+      'and the two’s complement integer d is set. In the assembled object code, operand b is spec-\n' +
+      'ified as follows:\n' +
+      'Bit Tested\tb\n' +
+      '0\t000\n' +
+      '1\t001\n' +
+      '2\t010\n' +
+      '3\t011\n' +
+      '4\t100\n' +
+      '5\t101\n' +
+      '6\t110\n' +
+      '7\t111\n',
+    example: 'If the index register contains 2000h, then upon the execution of a SET 0, (IX + 3h) \n' +
+      '2003h is 1. Bit 0 in memory location 2003h is the instruction, bit 0 in memory location \n' +
+      'least-significant bit.\n'
+  },
+  'SET b, (IY+d)': {
+    page: '257',
+    operation: 'SET b, (IY+d)',
+    opCode: 'SET',
+    effect: '(IY + d) b ← 1',
+    operands: 'b, (IY + d)',
+    desc: 'Bit b in the memory location addressed by the sum of the contents of the IY register pair \n' +
+      'and the two’s complement displacement d is set. In the assembled object code, operand b \n' +
+      'is specified as follows:\n' +
+      'Bit Tested\tb\n' +
+      '0\t000\n' +
+      '1\t001\n' +
+      '2\t010\n' +
+      '3\t011\n' +
+      '4\t100\n' +
+      '5\t101\n' +
+      '6\t110\n' +
+      '7\t111\n',
+    example: 'If Index Register IY contains 2000h, then upon the execution of a Set 0, (IY+3h) instruc-\n' +
+      '2003h is 1. Bit 0 in memory location 2003h is the least-sig-tion, bit 0 in memory location \n' +
+      'nificant bit.\n'
+  },
+  'RES b, m': {
+    page: '259',
+    operation: 'RES b, m',
+    opCode: 'RES',
+    effect: 'sb ← 0',
+    operands: 'b, m',
+    desc: 'Bit b in operand m is reset.\n',
+    example: 'Upon the execution of a RES 6, D instruction, bit 6 in register 0 is reset. Bit 0 in the D \n' +
+      'Register is the least-significant bit.\n' +
+      'Jump Group\n' +
+      'The following jump group instructions are each described in this section. Simply click to \n' +
+      'jump to an instruction’s description to learn more.\n' +
+      ' – see page 262JP nn\n' +
+      ' – see page 263JP cc, nn\n' +
+      ' – see page 265JR e\n' +
+      ' – see page 267JR C, e\n' +
+      ' – see page 269JR NC, e\n' +
+      ' – see page 271JR Z, e\n' +
+      ' – see page 273JR NZ, e\n' +
+      ' – see page 275JP (HL)\n' +
+      ' – see page 276JP (IX)\n' +
+      ' – see page 277JP (IY)\n' +
+      ' – see page 278DJNZ, e\n'
+  },
+  'JP nn': {
+    page: '262',
+    operation: 'JP nn',
+    opCode: 'JP',
+    effect: 'PC ← nn',
+    operands: 'nn',
+    desc: 'Operand nn is loaded to register pair Program Counter (PC). The next instruction is \n' +
+      'fetched from the location designated by the new contents of the PC.\n',
+    example: 'Condition Bits Affected\nNone.\n'
+  },
+  'JP cc, nn': {
+    page: '263',
+    operation: 'JP cc, nn',
+    opCode: 'JP',
+    effect: 'IF cc true, PC ← nn',
+    operands: 'cc, nn',
+    desc: 'If condition cc is true, the instruction loads operand nn to register pair Program Counter \n' +
+      '(PC), and the program continues with the instruction beginning at address nn. If condition \n' +
+      'cc is false, the Program Counter is incremented as usual, and the program continues with \n' +
+      'the next sequential instruction. Condition cc is programmed as one of eight statuses that \n' +
+      'correspond to condition bits in the Flag Register (Register F). These eight statuses are \n' +
+      'defined in the following table, which specifies the corresponding cc bit fields in the \n' +
+      'assembled object code.\n' +
+      'Relevant\n' +
+      'cc\tCondition\tFlag\n' +
+      '000\tNon-Zero (NZ)\tZ\n' +
+      '001\tZero (Z)\tZ\n' +
+      '010\tNo Carry (NC)\tC\n' +
+      '011\tCarry (C)\tC\n' +
+      '100\tParity Odd (PO)\tP/V\n' +
+      '101\tParity Even (PE)\tP/V\n' +
+      '110\tSign Positive (P)\tS\n' +
+      '111\tSign Negative (M)\tS\n',
+    example: 'If the Carry flag (i.e., the C flag in F Register) is set and address 1520h contains 03h, then \n' +
+      '1520h instruction, the Program Counter contains 1520h upon the execution of a JP C, \n' +
+      '03h from address 1520h.and, on the next machine cycle, the CPD fetches byte\n'
+  },
+  'JR e': {
+    page: '265',
+    operation: 'JR e',
+    opCode: 'JR',
+    effect: 'PC ← PC + e',
+    operands: 'e',
+    desc: 'This instruction provides for unconditional branching to other segments of a program. The \n' +
+      'value of displacement e is added to the Program Counter (PC) and the next instruction is \n' +
+      'fetched from the location designated by the new contents of the PC. This jump is mea-\n' +
+      'sured from the address of the instruction op code and contains a range of –126 to +129 \n' +
+      'bytes. The assembler automatically adjusts for the twice incremented PC.\n',
+    example: 'To jump forward five locations from address 480, the following assembly language state-\n' +
+      'ment is used: \n' +
+      'JR $+5 \n' +
+      'The resulting object code and final Program Counter value is shown in the following table:\n' +
+      'Location\tInstruction\n' +
+      '480\t18\n' +
+      '481\t03\n' +
+      '482\t–\n' +
+      '483\t–\n' +
+      '484\t–\n' +
+      ' PC after jump485\t←\n'
+  },
+  'JR C, e': {
+    page: '267',
+    operation: 'JR C, e',
+    opCode: 'Op Code',
+    effect: 'If C = 0, continue ',
+    operands: 'Operands',
+    desc: 'This instruction provides for conditional branching to other segments of a program \n' +
+      'depending on the results of a test on the Carry Flag. If the flag = 1, the value of displace-\n' +
+      'ment e is added to the Program Counter (PC) and the next instruction is fetched from the \n' +
+      'location designated by the new contents of the PC. The jump is measured from the address \n' +
+      'of the instruction op code and contains a range of –126 to +129 bytes. The assembler auto-\n' +
+      'matically adjusts for the twice incremented PC.\n' +
+      'If the flag = 0, the next instruction executed is taken from the location following this \n' +
+      'instruction. If condition is met\n',
+    example: 'The Carry flag is set and it is required to jump back four locations from 480. The assembly \n' +
+      'JR C, $–4language statement is \n' +
+      'The resulting object code and final Program Counter value is shown in the following table:\n' +
+      'Location           Instruction\n' +
+      '47C\t← PC after jump\n' +
+      '47D\t–\n' +
+      '47E\t–\n' +
+      '47F\t–\n' +
+      '480\t38\n' +
+      '481\tFA (two’s \n' +
+      'complement – 6)\n'
+  },
+  'JR NC, e': {
+    page: '269',
+    operation: 'JR NC, e',
+    opCode: 'Op Code',
+    effect: 'If C = 1, continue ',
+    operands: 'Operands',
+    desc: 'This instruction provides for conditional branching to other segments of a program \n' +
+      'depending on the results of a test on the Carry Flag. If the flag is equal to 0, the value of \n' +
+      'displacement e is added to the Program Counter (PC) and the next instruction is fetched \n' +
+      'from the location designated by the new contents of the PC. The jump is measured from \n' +
+      'the address of the instruction op code and contains a range of –126 to +129 bytes. The \n' +
+      'assembler automatically adjusts for the twice incremented PC.\n' +
+      'If the flag = 1, the next instruction executed is taken from the location following this \n' +
+      'instruction.\n' +
+      'If the condition is met:\n',
+    example: 'The Carry Flag is reset and it is required to repeat the jump instruction. The assembly lan-\n' +
+      'JR NC, $guage statement is \n' +
+      'The resulting object code and Program Counter after the jump are:\n' +
+      'Location\tInstruction\n' +
+      ' ← PC after jump480\t30\n' +
+      '481\t00\n'
+  },
+  'JR Z, e': {
+    page: '271',
+    operation: 'JR Z, e',
+    opCode: 'Op Code',
+    effect: 'If Z = 0, continue ',
+    operands: 'Operands',
+    desc: 'This instruction provides for conditional branching to other segments of a program \n' +
+      'depending on the results of a test on the Zero Flag. If the flag = 1, the value of displace-\n' +
+      'ment e is added to the Program Counter (PC) and the next instruction is fetched from the \n' +
+      'location designated by the new contents of the PC. The jump is measured from the address \n' +
+      'of the instruction op code and contains a range of –126 to +129 bytes. The assembler auto-\n' +
+      'matically adjusts for the twice-incremented PC.\n' +
+      'If the Zero Flag = 0, the next instruction executed is taken from the location following this \n' +
+      'instruction. \n' +
+      'If this condition is met, the following data results:\n',
+    example: 'The Zero Flag is set and it is required to jump forward five locations from address 300. \n' +
+      'The following assembly language statement is used:\n' +
+      'JR Z ,$ + 5\n' +
+      'The resulting object code and final Program Counter value are:\n' +
+      'Location\tInstruction\n' +
+      '300\t28\n' +
+      '301\t03\n' +
+      '–302\n' +
+      '303\t–\n' +
+      '304\t–\n' +
+      '305\t← PC after jump\n'
+  },
+  'JR NZ, e': {
+    page: '273',
+    operation: 'JR NZ, e',
+    opCode: 'Op Code',
+    effect: 'If Z = 1, continue ',
+    operands: 'Operands',
+    desc: 'This instruction provides for conditional branching to other segments of a program \n' +
+      'depending on the results of a test on the Zero Flag. If the flag = 0, the value of displace-\n' +
+      'ment e is added to the Program Counter (PC) and the next instruction is fetched from the \n' +
+      'location designated by the new contents of the PC. The jump is measured from the address \n' +
+      'of the instruction op code and contains a range of –126 to +129 bytes. The assembler auto-\n' +
+      'matically adjusts for the twice incremented PC.\n' +
+      'If the Zero Flag = 1, the next instruction executed is taken from the location following this \n' +
+      'instruction.\n' +
+      'If the condition is met:\n',
+    example: 'The Zero Flag is reset and it is required to jump back four locations from 480. The assem-\n' +
+      'JR NZ, $–4bly language statement is \n' +
+      'The resulting object code and final Program Counter value is:\n' +
+      'Location\tInstruction\n' +
+      '47C\t← PC after jump\n' +
+      '–47D\n' +
+      '47E\t–\n' +
+      '47F\t–\n' +
+      '480\t20\n' +
+      '481\tFA (two’s \n' +
+      'complement – 6)\n'
+  },
+  'JP (HL)': {
+    page: '275',
+    operation: 'JP (HL)',
+    opCode: 'JP',
+    effect: 'PC ← HL ',
+    operands: '(HL)',
+    desc: 'The Program Counter (PC) is loaded with the contents of the HL register pair. The next \n' +
+      'instruction is fetched from the location designated by the new contents of the PC.\n',
+    example: 'If the Program Counter contains 1000h and the HL register pair contains 4800h, then \n' +
+      '4800h.upon the execution of a JP (HL) instruction, the Program Counter contains\n'
+  },
+  'JP (IX)': {
+    page: '276',
+    operation: 'JP (IX)',
+    opCode: 'JP',
+    effect: 'pc ← IX',
+    operands: '(IX)',
+    desc: 'The Program Counter (PC) is loaded with the contents of the IX register pair. The next \n' +
+      'instruction is fetched from the location designated by the new contents of the PC.\n',
+    example: 'If the Program Counter contains 1000h and the IX register pair contains 4800h, then \n' +
+      '4800h.upon the execution of a JP (IX) instruction, the Program Counter contains\n'
+  },
+  'JP (IY)': {
+    page: '277',
+    operation: 'JP (IY)',
+    opCode: 'JP',
+    effect: 'PC ← IY',
+    operands: '(IY)',
+    desc: 'The Program Counter (PC) is loaded with the contents of the IY register pair. The next \n' +
+      'instruction is fetched from the location designated by the new contents of the PC.\n',
+    example: 'If the Program Counter contains 1000h and the IY register pair contains 4800h, then \n' +
+      '4800h.upon the execution of a JP (IY) instruction, the Program Counter contains\n'
+  },
+  'DJNZ, e': {
+    page: '278',
+    operation: 'DJNZ, e',
+    opCode: 'If B ≠ 0, PC ← PC + e',
+    effect: 'B ← B – 1',
+    operands: 'DJNZ',
+    desc: 'This instruction is similar to the conditional jump instructions except that a register value \n' +
+      'is used to determine branching. Register B is decremented, and if a nonzero value remains, \n' +
+      'the value of displacement e is added to the Program Counter (PC). The next instruction is \n' +
+      'fetched from the location designated by the new contents of the PC. The jump is measured \n' +
+      'from the address of the instruction op code and contains a range of –126 to +129 bytes. \n' +
+      'The assembler automatically adjusts for the twice incremented PC.\n' +
+      'If the result of decrementing leaves B with a zero value, the next instruction executed is \n' +
+      'taken from the location following this instruction.\n' +
+      ' 0:if B ≠\n',
+    example: 'A typical software routine is used to demonstrate the use of the DJNZ instruction. This \n' +
+      'routine moves a line from an input buffer (INBUF) to an output buffer (OUTBUF). It \n' +
+      'moves the bytes until it finds a CR, or until it has moved 80 bytes, whichever occurs first.\n' +
+      'LD          8, 80       ;Set up counter\n' +
+      'LD          HL, Inbuf   ;Set up pointers\n' +
+      'LD          DE, Outbuf\n' +
+      'LOOP: LID         A, (HL)     ;Get next byte from\n' +
+      ';input buffer\n' +
+      'LD          (DE), A     ;Store in output buffer\n' +
+      'CP          ODH         ;Is it a CR?\n' +
+      'JR          Z, DONE     ;Yes finished\n' +
+      'INC         HL          ;Increment pointers\n' +
+      'INC         DE\n' +
+      'DJNZ LOOP               ;Loop back if 80\n' +
+      ';bytes have not\n' +
+      ';been moved\n' +
+      'DONE:\n' +
+      'Call and Return Group\n' +
+      'The following call and return group instructions are each described in this section. Simply \n' +
+      'click to jump to an instruction’s description to learn more.\n' +
+      ' – see page 281CALL nn\n' +
+      ' – see page 283CALL cc, nn\n' +
+      ' – see page 285RET\n' +
+      ' – see page 286RET cc\n' +
+      ' – see page 288RETI\n' +
+      ' – see page 290RETN\n' +
+      ' – see page 292RST p\n'
+  },
+  'CALL nn': {
+    page: '281',
+    operation: 'CALL nn',
+    opCode: 'CALL',
+    effect: '(SP – 1) ← PCH, (SP – 2) ← PCL, PC ← nn',
+    operands: 'nn',
+    desc: 'The current contents of the Program Counter (PC) are pushed onto the top of the external \n' +
+      'memory stack. The operands nn are then loaded to the PC to point to the address in mem-\n' +
+      'ory at which the first op code of a subroutine is to be fetched. At the end of the subroutine, \n' +
+      'a RETurn instruction can be used to return to the original program flow by popping the top \n' +
+      'of the stack back to the PC. The push is accomplished by first decrementing the current \n' +
+      'contents of the Stack Pointer (register pair SP), loading the high-order byte of the PC con-\n' +
+      'tents to the memory address now pointed to by the SP; then decrementing SP again, and \n' +
+      'loading the low-order byte of the PC contents to the top of stack. \n' +
+      'Because this process is a 3-byte instruction, the Program Counter was incremented by \n' +
+      'three before the push is executed.\n',
+    example: 'The Program Counter contains 1A47h, the Stack Pointer contains 3002h, and memory \n' +
+      'locations contain the following data.\n' +
+      'Location\tContents\n' +
+      '1A47h                 CDh\n' +
+      'IA48h                  35h\n' +
+      '1A49h                  21h\n' +
+      '3521h is fetched to the If an instruction fetch sequence begins, the 3-byte instruction CD \n' +
+      '2135h. Upon CPU for execution. The mnemonic equivalent of this instruction is CALL \n' +
+      '3001h contains 1Ah, address 3000h the execution of this instruction, memory address \n' +
+      '4Ah, the Stack Pointer contains 3000h, and the Program Counter contains contains \n' +
+      '2135h, thereby pointing to the address of the first op code of the next subroutine to be \n' +
+      'executed.\n'
+  },
+  'CALL cc, nn': {
+    page: '283',
+    operation: 'CALL cc, nn',
+    opCode: 'Op Code',
+    effect: 'IF cc true: (sp – 1) ← PCH',
+    operands: 'Operands',
+    desc: 'If condition cc is true, this instruction pushes the current contents of the Program Counter \n' +
+      '(PC) onto the top of the external memory stack, then loads the operands nn to PC to point \n' +
+      'to the address in memory at which the first op code of a subroutine is to be fetched. At the \n' +
+      'end of the subroutine, a RETurn instruction can be used to return to the original program \n' +
+      'flow by popping the top of the stack back to PC. If condition cc is false, the Program \n' +
+      'Counter is incremented as usual, and the program continues with the next sequential \n' +
+      'instruction. The stack push is accomplished by first decrementing the current contents of \n' +
+      'the Stack Pointer (SP), loading the high-order byte of the PC contents to the memory \n' +
+      'address now pointed to by SP; then decrementing SP again, and loading the low-order \n' +
+      'byte of the PC contents to the top of the stack.\n' +
+      'Because this process is a 3-byte instruction, the Program Counter was incremented by \n' +
+      'three before the push is executed. \n' +
+      'Condition cc is programmed as one of eight statuses that corresponds to condition bits in \n' +
+      'the Flag Register (Register F). These eight statuses are defined in the following table, \n' +
+      'which also specifies the corresponding cc bit fields in the assembled object code.\n' +
+      'Relevant\n' +
+      'cc\tCondition\tFlag\n' +
+      '000\tNon-Zero (NZ)\tZ\n' +
+      '001\tZero (Z)\tZ\n' +
+      '010\tNon Carry (NC)\tC\n' +
+      '011\tCarry (C)\tZ\n' +
+      '100\tParity Odd (PO)\tP/V\n' +
+      '101\tParity Even (PE)\tP/V\n' +
+      '110\tSign Positive (P)\tS\n' +
+      '111\tSign Negative (M)\tS\n' +
+      'If cc is true:\n',
+    example: 'The C Flag in the F Register is reset, the Program Counter contains 1A47h, the Stack \n' +
+      '3002h, and memory locations contain the following data.Pointer contains \n' +
+      'Location\tContents\n' +
+      '1A47h\tD4h\n' +
+      '1448h\t35h\n' +
+      '1A49h\t21h\n' +
+      'D43521h is fetched to the If an instruction fetch sequence begins, the 3-byte instruction \n' +
+      '2135h. CPU for execution. The mnemonic equivalent of this instruction is CALL NC, \n' +
+      '3001h contains 1Ah, address Upon the execution of this instruction, memory address \n' +
+      '3000h contains 4Ah, the Stack Pointer contains 3000h, and the Program Counter contains \n' +
+      '2135h, thereby pointing to the address of the first op code of the next subroutine to be \n' +
+      'executed.\n'
+  },
+  RET: {
+    page: '285',
+    operation: 'RET',
+    opCode: 'RET',
+    effect: 'pCL ← (sp), pCH ← (sp+1)',
+    operands: '11010\t0\t01',
+    desc: 'The byte at the memory location specified by the contents of the Stack Pointer (SP) Regis-\n' +
+      'ter pair is moved to the low-order eight bits of the Program Counter (PC). The SP is now \n' +
+      'incremented and the byte at the memory location specified by the new contents of this \n' +
+      'instruction is fetched from the memory location specified by the PC. This instruction is \n' +
+      'normally used to return to the main line program at the completion of a routine entered by \n' +
+      'a CALL instruction.\n',
+    example: 'The Program Counter contains 3535h, the Stack Pointer contains 2000h, memory loca-\n' +
+      '2000h contains B5h, and memory location 2001h contains 18h. Upon the execution tion \n' +
+      '2002h and the Program Counter contains of a RET instruction, the Stack Pointer contains \n' +
+      '18B5h, thereby pointing to the address of the next program op code to be fetched.\n'
+  },
+  'RET cc': {
+    page: '286',
+    operation: 'RET cc',
+    opCode: 'RET',
+    effect: 'If cc true: PCL ← (sp), pCH ← (sp+1)',
+    operands: 'cc',
+    desc: 'If condition cc is true, the byte at the memory location specified by the contents of the \n' +
+      'Stack Pointer (SP) Register pair is moved to the low-order eight bits of the Program Coun-\n' +
+      'ter (PC). The SP is incremented and the byte at the memory location specified by the new \n' +
+      'contents of the SP are moved to the high-order eight bits of the PC. The SP is incremented \n' +
+      'again. The next op code following this instruction is fetched from the memory location \n' +
+      'specified by the PC. This instruction is normally used to return to the main line program at \n' +
+      'the completion of a routine entered by a CALL instruction. If condition cc is false, the PC \n' +
+      'is simply incremented as usual, and the program continues with the next sequential \n' +
+      'instruction. Condition cc is programmed as one of eight status that correspond to condition \n' +
+      'bits in the Flag Register (Register F). These eight status are defined in the following table, \n' +
+      'which also specifies the corresponding cc bit fields in the assembled object code.\n' +
+      'Relevant\n' +
+      'cc\tCondition\tFlag\n' +
+      '000\tNon-Zero (NZ)\tZ\n' +
+      '001\tZero (Z)\tZ\n' +
+      '010\tNon Carry (NC)\tC\n' +
+      '011\tCarry (C)\tC\n' +
+      '100\tParity Odd (PO)\tP/V\n' +
+      '101\tParity Even (PE)\tP/V\n' +
+      '110\tSign Positive (P)\tS\n' +
+      '111\tSign Negative (M)\tS\n' +
+      'If cc is true, then the following data is returned:\n',
+    example: 'The S flag in the F Register is set, the Program Counter contains 3535h, the Stack Pointer \n' +
+      '2000h, memory location 2000h contains B5h, and memory location 2001h con-contains \n' +
+      '18h. Upon the execution of a RET M instruction, the Stack Pointer contains 2002h tains \n' +
+      '18B5h, thereby pointing to the address of the next pro-and the Program Counter contains \n' +
+      'gram op code to be fetched.\n'
+  },
+  RETI: {
+    page: '288',
+    operation: 'RETI',
+    opCode: 'RETI',
+    effect: 'Return from Interrupt',
+    operands: '11110\t1\t01',
+    desc: 'This instruction is used at the end of a maskable interrupt service routine to:\n' +
+      '•\tRestore the contents of the Program Counter (analogous to the RET instruction)\n' +
+      '•\tSignal an I/O device that the interrupt routine is completed. The RETI instruction also \n' +
+      'facilitates the nesting of interrupts, allowing higher priority devices to temporarily \n' +
+      'suspend service of lower priority service routines. However, this instruction does not \n' +
+      'enable interrupts that were disabled when the interrupt routine was entered. Before \n' +
+      'doing the RETI instruction, the enable interrupt instruction (EI) should be executed to \n' +
+      'allow recognition of interrupts after completion of the current service routine.\n',
+    example: 'Assume that there are two interrupting devices, A and B, connected in a daisy-chain con-\n' +
+      'figuration, with A having a higher priority than B.\n' +
+      'BA\n' +
+      '+\n' +
+      'IEO\tIEI\n' +
+      'IEI\n' +
+      'IEO\n' +
+      'INT\n' +
+      'B generates an interrupt and is acknowledged. The interrupt enable out, IEO, of B goes \n' +
+      'Low, blocking any lower priority devices from interrupting while B is being serviced. \n' +
+      'Then A generates an interrupt, suspending service of B. The IEO of A goes Low, indicat-\n' +
+      'ing that a higher priority device is being serviced. The A routine is completed and a RETI \n' +
+      'is issued resetting the IEO of A, allowing the B routine to continue. A second RETI is \n' +
+      'issued on completion of the B routine and the IE0 of B is reset (High), allowing lower-pri-\n' +
+      'ority devices interrupt access.\n'
+  },
+  RETN: {
+    page: '290',
+    operation: 'RETN',
+    opCode: 'RETN',
+    effect: 'Return from nonmaskable interrupt',
+    operands: '11110\t1\t01',
+    desc: 'This instruction is used at the end of a nonmaskable interrupts service routine to restore \n' +
+      'the contents of the Program Counter (analogous to the RET instruction). The state of IFF2 \n' +
+      'is copied back to IFF1 so that maskable interrupts are enabled immediately following the \n' +
+      'RETN if they were enabled before the nonmaskable interrupt.\n',
+    example: 'If the Stack Pointer contains 1000h and the Program Counter contains 1A45h when a \n' +
+      'Nonmaskable Interrupt (NMI) signal is received, the CPU ignores the next instruction and \n' +
+      '0066h. The current Program Counter con-instead restarts, returning to memory address \n' +
+      '1A45h, which is pushed onto the external stack address of 0FFFh and 0FFEh, high-tains \n' +
+      '0066h is loaded onto the Program Counter. That address begins an order byte first, and \n' +
+      'interrupt service routine that ends with a RETN instruction. \n' +
+      'Upon the execution of a RETN instruction, the contents of the former Program Counter \n' +
+      'are popped off the external memory stack, low-order first, resulting in the Stack Pointer \n' +
+      '1000h. The program flow continues where it left off with an op code again containing \n' +
+      '1A45h, order-byte first, and 0066h is loaded onto the Program Counter. fetch to address\n' +
+      'That address begins an interrupt service routine that ends with a RETN instruction. Upon \n' +
+      'the execution of a RETN instruction, the contents of the former Program Counter are \n' +
+      'popped off the external memory stack, low-order first, resulting in stack pointer contents \n' +
+      '1000h. The program flow continues where it left off with an op code fetch to address of \n' +
+      '1A45h.\n'
+  },
+  'RST p': {
+    page: '292',
+    operation: 'RST p',
+    opCode: 'RST',
+    effect: '(SP – 1) ← PCH, (SP – 2) ← PCL, PCH ← 0, PCL ← P',
+    operands: 'p',
+    desc: 'The current Program Counter (PC) contents are pushed onto the external memory stack, \n' +
+      'and the Page 0 memory location assigned by operand p is loaded to the PC. Program exe-\n' +
+      'cution then begins with the op code in the address now pointed to by PC. The push is per-\n' +
+      'formed by first decrementing the contents of the Stack Pointer (SP), loading the high-order \n' +
+      'byte of PC to the memory address now pointed to by SP, decrementing SP again, and load-\n' +
+      'ing the low-order byte of PC to the address now pointed to by SP. The Restart instruction \n' +
+      'allows for a jump to one of eight addresses indicated in the following table. The operand p \n' +
+      'is assembled to the object code using the corresponding T state. \n' +
+      'Because all addresses are stored in Page 0 of memory, the high-order byte of PC is loaded \n' +
+      '00h. The number selected from the p column of the table is loaded to the low-order with \n' +
+      'byte of PC.\n' +
+      'pt\n' +
+      '00h\t000\n' +
+      '08h\t001\n' +
+      '10h\t010\n' +
+      '18h\t011\n' +
+      '20h\t100\n' +
+      '28h\t101\n' +
+      '30h\t110\n' +
+      '38h\t111\n',
+    example: 'If the Program Counter contains 15B3h, then upon the execution of an RST 18h (object \n' +
+      '1101111) instruction, the PC contains 0018h as the address of the next fetched op code \n' +
+      'code.\n' +
+      'Input and Output Group\n' +
+      'The following input and output group instructions are each described in this section. Sim-\n' +
+      'ply click to jump to an instruction’s description to learn more.\n' +
+      ' – see page 295IN A, (n)\n' +
+      ' – see page 296IN r (C)\n' +
+      ' – see page 298INI\n' +
+      ' – see page 300INIR\n' +
+      ' – see page 302IND\n' +
+      ' – see page 304INDR\n' +
+      ' – see page 306OUT (n), A\n' +
+      ' – see page 307OUT (C), r\n' +
+      ' – see page 309OUTI\n' +
+      ' – see page 311OTIR\n' +
+      ' – see page 313OUTD\n' +
+      ' – see page 315OTDR\n'
+  },
+  'IN A, (n)': {
+    page: '295',
+    operation: 'IN A, (n)',
+    opCode: 'IN',
+    effect: 'A ← (n)',
+    operands: 'A, (n)',
+    desc: 'The operand n is placed on the bottom half (A0 through A7) of the address bus to select \n' +
+      'the I/O device at one of 256 possible ports. The contents of the Accumulator also appear \n' +
+      'on the top half (A8 through A15) of the address bus at this time. Then one byte from the \n' +
+      'selected port is placed on the data bus and written to the Accumulator (Register A) in the \n' +
+      'CPU.\n',
+    example: 'The Accumulator contains 23h, and byte 7Bh is available at the peripheral device mapped \n' +
+      '01h. Upon the execution of an IN A, (01h) instruction, the Accumula-to I/O port address \n' +
+      '7Bh.tor contains\n'
+  },
+  'IN r (C)': {
+    page: '296',
+    operation: 'IN r (C)',
+    opCode: 'IN',
+    effect: 'r ← (C)',
+    operands: 'r, (C)',
+    desc: 'The contents of Register C are placed on the bottom half (A0 through A7) of the address \n' +
+      'bus to select the I/O device at one of 256 possible ports. The contents of Register B are \n' +
+      'placed on the top half (A8 through A15) of the address bus at this time. Then one byte \n' +
+      'from the selected port is placed on the data bus and written to register r in the CPU. Regis-\n' +
+      'ter r identifies any of the CPU registers shown in the following table, which also indicates \n' +
+      'the corresponding 3-bit r field for each. The flags are affected, checking the input data.\n' +
+      'Register\tr\n' +
+      'Flag\t110\tUndefined op code; set the flag\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n' +
+      'A\t111\n',
+    example: 'Register C contains 07h, Register B contains 10h, and byte 7Bh is available at the periph-\n' +
+      '07h. Upon the execution of an IN D, (C) com-eral device mapped to I/O port address \n' +
+      '7Bh.mand, the D Register contains\n'
+  },
+  INI: {
+    page: '298',
+    operation: 'INI',
+    opCode: 'INI',
+    effect: '(HL) ← (C), B ← B – 1, HL ← HL + 1',
+    operands: '11110\t1\t01',
+    desc: 'The contents of Register C are placed on the bottom half (A0 through A7) of the address \n' +
+      'bus to select the I/O device at one of 256 possible ports. Register B can be used as a byte \n' +
+      'counter, and its contents are placed on the top half (A8 through A15) of the address bus at \n' +
+      'this time. Then one byte from the selected port is placed on the data bus and written to the \n' +
+      'CPU. The contents of the HL register pair are then placed on the address bus and the input \n' +
+      'byte is written to the corresponding location of memory. Finally, the byte counter is decre-\n' +
+      'mented and register pair HL is incremented.\n',
+    example: 'Register C contains 07h, Register B contains 10h, the HL register pair contains 1000h, \n' +
+      '7Bh is available at the peripheral device mapped to I/O port address 07h. Upon and byte \n' +
+      '1000h contains 7Bh, the HL register the execution of an INI instruction, memory location \n' +
+      '1001h, and Register B contains 0Fh.pair contains\n'
+  },
+  INIR: {
+    page: '300',
+    operation: 'INIR',
+    opCode: 'INIR',
+    effect: '(HL) ← (C), B ← B – 1, HL ← HL +1',
+    operands: '11110\t1\t01',
+    desc: 'The contents of Register C are placed on the bottom half (A0 through A7) of the address \n' +
+      'bus to select the I/O device at one of 256 possible ports. Register B is used as a byte coun-\n' +
+      'ter, and its contents are placed on the top half (A8 through A15) of the address bus at this \n' +
+      'time. Then one byte from the selected port is placed on the data bus and written to the \n' +
+      'CPU. The contents of the HL register pair are placed on the address bus and the input byte \n' +
+      'is written to the corresponding location of memory. Then register pair HL is incremented, \n' +
+      'the byte counter is decremented. If decrementing causes B to go to 0, the instruction is ter-\n' +
+      'minated. If B is not 0, the Program Counter is decremented by two and the instruction \n' +
+      'repeated. Interrupts are recognized and two refresh cycles execute after each data transfer. \n' +
+      'Note:If B is set to 0 prior to instruction execution, 256 bytes of data are input.\n' +
+      'If B ≠ 0:\n',
+    example: 'Register C contains 07h, Register B contains 03h, the HL register pair contains 1000h, \n' +
+      'and the following sequence of bytes is available at the peripheral device mapped to I/O \n' +
+      '07h.port of address \n' +
+      '51h\n' +
+      'A9h\n' +
+      '03h\n' +
+      '1003h, Register Upon the execution of an INIR instruction, the HL register pair contains \n' +
+      'B contains a 0, and the memory locations contain the following data: \n' +
+      '1000h\t51h\n' +
+      '1001h\tA9h\n' +
+      '1002h\t03h\n'
+  },
+  IND: {
+    page: '302',
+    operation: 'IND',
+    opCode: 'IND',
+    effect: '(HL) ← (C), B ← B – 1, HL ← HL – 1',
+    operands: '11110\t1\t01',
+    desc: 'The contents of Register C are placed on the bottom half (A0 through A7) of the address \n' +
+      'bus to select the I/O device at one of 256 possible ports. Register B can be used as a byte \n' +
+      'counter, and its contents are placed on the top half (A8 through A15) of the address bus at \n' +
+      'this time. Then one byte from the selected port is placed on the data bus and written to the \n' +
+      'CPU. The contents of the HL register pair are placed on the address bus and the input byte \n' +
+      'is written to the corresponding location of memory. Finally, the byte counter and register \n' +
+      'pair HL are decremented.\n',
+    example: 'Register C contains 07h, Register B contains 10h, the HL register pair contains 1000h, \n' +
+      '7Bh is available at the peripheral device mapped to I/O port address 07h. Upon and byte \n' +
+      '1000h contains 7Bh, the HL regis-the execution of an IND instruction, memory location \n' +
+      '0FFFh, and Register B contains 0Fh.ter pair contains\n'
+  },
+  INDR: {
+    page: '304',
+    operation: 'INDR',
+    opCode: 'INDR',
+    effect: '(HL) ← (C), B ← 131, HL ← HL1',
+    operands: '11110\t1\t01',
+    desc: 'The contents of Register C are placed on the bottom half (A0 through A7) of the address \n' +
+      'bus to select the I/O device at one of 256 possible ports. Register B is used as a byte coun-\n' +
+      'ter, and its contents are placed on the top half (A8 through A15) of the address bus at this \n' +
+      'time. Then one byte from the selected port is placed on the data bus and written to the \n' +
+      'CPU. The contents of the HL register pair are placed on the address bus and the input byte \n' +
+      'is written to the corresponding location of memory. Then HL and the byte counter are dec-\n' +
+      'remented. If decrementing causes B to go to 0, the instruction is terminated. If B is not 0, \n' +
+      'the Program Counter is decremented by two and the instruction repeated. Interrupts are \n' +
+      'recognized and two refresh cycles are executed after each data transfer. \n' +
+      'When B is set to 0 prior to instruction execution, 256 bytes of data are input.\n' +
+      'If B ≠ 0:\n',
+    example: 'Register C contains 07h, Register B contains 03h, the HL register pair contains 1000h \n' +
+      'and the following sequence of bytes is available at the peripheral device mapped to I/O \n' +
+      '07h:port address \n' +
+      '51h\n' +
+      'A9h\n' +
+      '03h\n' +
+      '0FFDh, Register Upon the execution of an INDR instruction, the HL register pair contains \n' +
+      'B contains a 0, and the memory locations contain the following data: \n' +
+      '0FFEh\t03h\n' +
+      '0FFFh\tA9h\n' +
+      '1000h\t51h\n'
+  },
+  'OUT (n), A': {
+    page: '306',
+    operation: 'OUT (n), A',
+    opCode: 'OUT',
+    effect: '(n) ← A',
+    operands: '(n), A',
+    desc: 'The operand n is placed on the bottom half (A0 through A7) of the address bus to select \n' +
+      'the I/O device at one of 256 possible ports. The contents of the Accumulator (Register A) \n' +
+      'also appear on the top half (A8 through A15) of the address bus at this time. Then the byte \n' +
+      'contained in the Accumulator is placed on the data bus and written to the selected periph-\n' +
+      'eral device.\n',
+    example: 'If the Accumulator contains 23h, then upon the execution of an OUT (01h) instruction, \n' +
+      '23h is written to the peripheral device mapped to I/O port address 01h.byte\n'
+  },
+  'OUT (C), r': {
+    page: '307',
+    operation: 'OUT (C), r',
+    opCode: 'OUT',
+    effect: '(C) ← r',
+    operands: '(C), r',
+    desc: 'The contents of Register C are placed on the bottom half (A0 through A7) of the address \n' +
+      'bus to select the I/O device at one of 256 possible ports. The contents of Register B are \n' +
+      'placed on the top half (A8 through A15) of the address bus at this time. Then the byte con-\n' +
+      'tained in register r is placed on the data bus and written to the selected peripheral device. \n' +
+      'Register r identifies any of the CPU registers shown in the following table, which also \n' +
+      'shows the corresponding three-bit r field for each that appears in the assembled object \n' +
+      'code.\n' +
+      'Register\tr\n' +
+      'B\t000\n' +
+      'C\t001\n' +
+      'D\t010\n' +
+      'E\t011\n' +
+      'H\t100\n' +
+      'L\t101\n' +
+      'A\t111\n',
+    example: 'If Register C contains 01h and the D Register contains 5Ah, then upon the execution of an \n' +
+      '5Ah is written to the peripheral device mapped to I/O port OUT (C), D instruction, byte \n' +
+      '01h.address\n'
+  },
+  OUTI: {
+    page: '309',
+    operation: 'OUTI',
+    opCode: 'OUTI',
+    effect: '(C) ← (HL), B ← B – 1, HL ← HL + 1',
+    operands: '11110\t1\t01',
+    desc: 'The contents of the HL register pair are placed on the address bus to select a location in \n' +
+      'memory. The byte contained in this memory location is temporarily stored in the CPU. \n' +
+      'Then, after the byte counter (B) is decremented, the contents of Register C are placed on \n' +
+      'the bottom half (A0 through A7) of the address bus to select the I/O device at one of 256 \n' +
+      'possible ports. Register B can be used as a byte counter, and its decremented value is \n' +
+      'placed on the top half (A8 through A15) of the address bus. The byte to be output is placed \n' +
+      'on the data bus and written to a selected peripheral device. Finally, the register pair HL is \n' +
+      'incremented.\n',
+    example: 'If Register C contains 07h, Register B contains 10h, the HL register pair contains 100014 \n' +
+      '1000h contains 5914, then upon the execution of an OUTI instruc-and memory address \n' +
+      '0Fh, the HL register pair contains 1001h, and byte 59h is writ-tion, Register B contains \n' +
+      '07h.ten to the peripheral device mapped to I/O port address\n'
+  },
+  OTIR: {
+    page: '311',
+    operation: 'OTIR',
+    opCode: 'OTIR',
+    effect: '(C) ← (HL), B ← B – 1, HL ← HL + 1',
+    operands: '11110\t1\t01',
+    desc: 'The contents of the HL register pair are placed on the address bus to select a location in \n' +
+      'memory. The byte contained in this memory location is temporarily stored in the CPU. \n' +
+      'Then, after the byte counter (B) is decremented, the contents of Register C are placed on \n' +
+      'the bottom half (A0 through A7) of the address bus to select the I/O device at one of 256 \n' +
+      'possible ports. Register B can be used as a byte counter, and its decremented value is \n' +
+      'placed on the top half (A8 through A15) of the address bus at this time. Next, the byte to \n' +
+      'be output is placed on the data bus and written to the selected peripheral device. Then reg-\n' +
+      'ister pair HL is incremented. If the decremented B Register is not 0, the Program Counter \n' +
+      '(PC) is decremented by two and the instruction is repeated. If B has gone to 0, the instruc-\n' +
+      'tion is terminated. Interrupts are recognized and two refresh cycles are executed after each \n' +
+      'data transfer. \n' +
+      'Note:When B is set to 0 prior to instruction execution, the instruction outputs 256 bytes of data.\n' +
+      'If B ≠ 0:\n',
+    example: 'Register C contains 07h, Register B contains 03h, the HL register pair contains 1000h, \n' +
+      'and memory locations contain the following data.\n' +
+      '1000h           contains           51h\n' +
+      '1001h           contains           A9h\n' +
+      '1002h           contains           03h\n' +
+      '1003h, Register Upon the execution of an OTIR instruction, the HL register pair contains \n' +
+      'B contains a 0, and a group of bytes is written to the peripheral device mapped to I/O port \n' +
+      '07h in the following sequence:address \n' +
+      '51h\n' +
+      'A9h\n' +
+      '03h\n'
+  },
+  OUTD: {
+    page: '313',
+    operation: 'OUTD',
+    opCode: 'OUTD',
+    effect: '(C) ← (HL), B ← B – 1, HL ← HL – 1',
+    operands: '11110\t1\t01',
+    desc: 'The contents of the HL register pair are placed on the address bus to select a location in \n' +
+      'memory. The byte contained in this memory location is temporarily stored in the CPU. \n' +
+      'Then, after the byte counter (B) is decremented, the contents of Register C are placed on \n' +
+      'the bottom half (A0 through A7) of the address bus to select the I/O device at one of 256 \n' +
+      'possible ports. Register B can be used as a byte counter, and its decremented value is \n' +
+      'placed on the top half (A8 through A15) of the address bus at this time. Next, the byte to \n' +
+      'be output is placed on the data bus and written to the selected peripheral device. Finally, \n' +
+      'the register pair HL is decremented.\n',
+    example: 'If Register C contains 07h, Register B contains 10h, the HL register pair contains 1000h, \n' +
+      '1000h contains 59h, then upon the execution of an OUTD instruc-and memory location \n' +
+      '0Fh, the HL register pair contains 0FFFh, and byte 59h is writ-tion, Register B contains \n' +
+      '07h.ten to the peripheral device mapped to I/O port address\n'
+  },
+  OTDR: {
+    page: '315',
+    operation: 'OTDR',
+    opCode: 'OTDR',
+    effect: '(C) ← (HL), B ← B – 1, HL ← HL – 1',
+    operands: '11110\t1\t01',
+    desc: 'The contents of the HL register pair are placed on the address bus to select a location in \n' +
+      'memory. The byte contained in this memory location is temporarily stored in the CPU. \n' +
+      'Then, after the byte counter (B) is decremented, the contents of Register C are placed on \n' +
+      'the bottom half (A0 through A7) of the address bus to select the I/O device at one of 256 \n' +
+      'possible ports. Register B can be used as a byte counter, and its decremented value is \n' +
+      'placed on the top half (A8 through A15) of the address bus at this time. Next, the byte to \n' +
+      'be output is placed on the data bus and written to the selected peripheral device. Then, reg-\n' +
+      'ister pair HL is decremented and if the decremented B Register is not 0, the Program \n' +
+      'Counter (PC) is decremented by two and the instruction is repeated. If B has gone to 0, the \n' +
+      'instruction is terminated. Interrupts are recognized and two refresh cycles are executed \n' +
+      'after each data transfer. \n' +
+      'Note:When B is set to 0 prior to instruction execution, the instruction outputs 256 bytes of data.\n' +
+      'If B ≠ 0:\n',
+    example: 'Register C contains 07h, Register B contains 03h, the HL register pair contains 1000h, \n' +
+      'and memory locations contain the following data.\n' +
+      '0FFEh                  51h\n' +
+      '0FFFh                 A9h\n' +
+      '1000h                  03h\n' +
+      '0FFDh, Register Upon the execution of an OTDR instruction, the HL register pair contain \n' +
+      'B contains a 0, and a group of bytes is written to the peripheral device mapped to I/O port \n' +
+      '07h in the following sequence:address \n' +
+      '03h\n' +
+      'A9h\n' +
+      '51h\n'
+  }
+}

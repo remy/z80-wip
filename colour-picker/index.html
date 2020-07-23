@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by rem (http://jsbin.com/dunazep/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>ZX 80 colour picker tool</title>
+<style id="jsbin-css">
+* {
+  font-family: menlo, monospace;
+  box-sizing: border-box;
+}
+
+html {
+  background: #ccc;
+}
+
+.flags {
+  margin: 20px;
+  margin-left: 0;
+}
+
+label {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+ 
+.container div, .name {
+  height: 40px;
+  line-height: 20px;
+  padding: 10px;
+  color: #fff;
+}
+
+.container .light,
+.container .dark {
+  text-shadow: .5px .5px 0.5px rgba(12,12,12,.5);
+}
+
+.container div.name {
+  text-align: right;
+  background: white;
+  color: black;
+  flex: 1 1 25%;
+  min-width: 100px;
+}
+
+
+.container div {
+  cursor: pointer;
+  flex: 1;
+  flex-basis: 40%;
+  height: 40px;
+}
+
+pre {
+  padding: 10px;
+}
+</style>
+</head>
+<body>
+  <h1>ZX 48K colour picker</h1>
+  <div class="flags">
+    <label><input checked name="colourfor" value="ink" type="radio"> Ink</label>
+    <label><input name="colourfor" type="radio" value="paper"> Paper</label>
+    <label><input name="bright" type="checkbox"> Bright</label>
+    <label><input name="blink" type="checkbox"> Blink</label>
+  </div>
+  <div id="picker"></div>
+  <pre></pre>
+<script id="jsbin-javascript">
+console.clear();
+
+const $ = document.querySelector.bind(document);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+const ELEM = (type, props) => {
+  const el = document.createElement(type);
+  for (const prop in props) {
+    el[prop] = props[prop];
+  }
+  return el
+}
+
+
+// https://en.m.wikipedia.org/wiki/ZX_Spectrum_graphic_modes#Color_palette
+const raw = `0	000	#000000	#000000	black
+1	001	#0000D7	#0000FF	blue
+2	010	#D70000	#FF0000	red
+3	011	#D700D7	#FF00FF	magenta
+4	100	#00D700	#00FF00	green
+5	101	#00D7D7	#00FFFF	cyan
+6	110	#D7D700	#FFFF00	yellow
+7	111	#D7D7D7	#FFFFFF	white`;
+
+const settings = {
+  ink: 0,
+  paper: 7,
+  bright: false,
+  blink: false,
+}
+
+const picker = $('#picker');
+const code = $('pre');
+let ink = true;
+
+$$('input[name="colourfor"]').forEach(e => {
+  const isink = e.value === 'ink';
+  e.onclick = () => {
+    ink = isink;
+  }
+});
+
+$$('input[type="checkbox"]').forEach(e => {
+  e.onclick = () => {
+    settings[e.name] = !settings[e.name];
+    update();
+  }
+});
+
+const map = raw.split('\n').map(line => {
+  let [num, binary, hex, hexlight, name] = line.split('\t');
+  num = parseInt(num, 10);
+  
+  const div = ELEM('div', { className: 'container', innerHTML: `<div class="name">${name}</div>` });
+  
+  const updateOnClick = bright => {
+    settings[ink ? 'ink' : 'paper'] = num;
+    settings.bright = bright;
+    $('input[name="bright"]').checked = bright;
+    update();    
+  }
+  
+  const a = ELEM('div', {
+    className: 'dark',
+    style: `background: ${hex}`,
+    onclick: () => updateOnClick(false),
+    innerHTML: hex,
+  });
+  
+  const b = ELEM('div', { 
+    className: 'light',
+    style: `background: ${hexlight}`,
+    onclick: () => updateOnClick(true),
+    innerHTML: hexlight,
+  });
+  
+  div.appendChild(a);
+  div.appendChild(b);
+  
+  picker.appendChild(div);
+    
+  
+  return {
+    num, binary, hex, hexlight, name
+  }
+});
+
+function update() {
+  const binary = [
+    settings.blink ? 1 : 0,
+    settings.bright ? 1 : 0,
+    settings.paper.toString(2).padStart(3, 0),
+    settings.ink.toString(2).padStart(3, 0),
+  ];
+  
+  const hex = '0x' + parseInt(binary.join(''), 2).toString(16);
+  const dec = parseInt(binary.join(''), 2).toString(10);
+  
+  code.innerHTML = [
+    binary.join(' '),
+    hex,
+    dec,
+    '\n; code sample\n',
+    sample(dec),
+  ].join('\n');
+  
+  const ink = map[settings.ink];
+  const paper = map[settings.paper];
+  
+  const background = settings.bright ? paper.hexlight : paper.hex;
+  const color = settings.bright ? ink.hexlight : ink.hex; 
+  
+  const style = `background: ${background}; color: ${color}`;
+  console.log(style)
+  code.style = style;
+  
+  code.className = `ink-${map[settings.ink].name} paper-${map[settings.paper].name}`
+}
+
+function sample(dec) {
+  const { ink, paper, bright, blink } = settings;
+  return `ld a,${dec}; ink: ${ink}, paper: ${paper}, bright: ${bright ? '1' : '0'}, blink: ${blink ? '1' : 0}
+ld (23695),a; set our temporary screen colours.
+ret`;
+}
+</script>
+</body>
+</html>
