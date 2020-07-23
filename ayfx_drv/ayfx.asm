@@ -24,6 +24,11 @@ reloc_0:
 	ld 	a,(ayfx_bank)
 	add	a
 	jr	z,skip
+reloc_11:
+	ld 	a,(ayfx_index)
+	and	a
+	jr	z,reloc_1
+	;break
 reloc_1:
 	;; TODO activate_user_bank could set z flag if the bank isn't set
 	call	activate_user_bank
@@ -33,7 +38,7 @@ reloc_2:
 	call 	AFXFRAME
 reloc_3:
 	call	restore_bank
-	push	ix
+	pop	ix
 skip:
 	ret
 
@@ -76,9 +81,12 @@ bnot1:
 
 ; B=2: start effect value DE
 callId2_set_effect:
+	;break
 reloc_8:
 	call 	activate_user_bank
 	ld	a,e			; E = effect id
+reloc_call2_1:
+	ld	(ayfx_index), a
 	push	ix
 reloc_9:
 	call 	AFXPLAY
@@ -326,7 +334,7 @@ AFXPLAY
 	ld l,a
 	add hl,hl
 afxBnkAdr
-	ld bc,START_OF_FX_BANK		; this address is set during AFXINIT and points to our sound effects bank -- IMPORTANT, RS had coded this into a known position
+	ld bc,START_OF_FX_BANK+1	; this address is set during AFXINIT and points to our sound effects bank -- IMPORTANT, RS had coded this into a known position
 	add hl,bc
 	ld c,(hl)
 	inc hl
@@ -407,7 +415,7 @@ reloc_start:
         defw    reloc_8+2
         defw    reloc_9+2
         defw    reloc_10+2
-;        defw    reloc_11+2
+        defw    reloc_11+2
         defw    reloc_12+2
         defw    reloc_13+3
         defw    reloc_14+3
@@ -418,4 +426,5 @@ reloc_start:
 	defw	reloc_ab2+2
 	defw	reloc_aub1+2
 	defw	reloc_aub2+2
+	defw	reloc_call2_1+2
 reloc_end:
