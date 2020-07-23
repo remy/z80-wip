@@ -13,32 +13,27 @@ api_entry:
 	jr      ayfx_api
 	nop
 
-; At $0003 is the entry point for the interrupt handler. This will only be
-; called if bit 7 of the driver id byte has been set in your .DRV file, so
-; need not be implemented otherwise.
+; At $0003 is the entry point for the interrupt handler (which is why there's a
+; `nop` above). This is called because bit 7 of the driver id byte has been set
+; in the .DRV file.
 im1_entry:
+
 ; Before we can call the play routine, we need to swap in the bank with
 ; the sfx, but if we don't have those details from the user code, then
-; it'll bork. So I load in the user bank and check for a zero value
-reloc_0:
+; it'll bork. So I load in the user bank and if it's not been set yet
+; I'll bail out early (jr skip)
+reloc_ir_1:
 	ld 	a,(ayfx_bank)
 	add	a
 	jr	z,skip
-reloc_11:
-	ld 	a,(ayfx_index)
-	and	a
-	jr	z,reloc_1
-	;break
-reloc_1:
-	;; TODO activate_user_bank could set z flag if the bank isn't set
+reloc_ir_2:
 	call	activate_user_bank
 	push	ix 			; the ayfx uses IX, so preseve it
-reloc_2:
-	;; FIXME this causes a crash
-	call 	AFXFRAME
-reloc_3:
-	call	restore_bank
-	pop	ix
+reloc_ir_3:
+	call 	AFXFRAME		; this is the original afx play routine
+reloc_ir_4:
+	call	restore_bank		; put the original bank back into MMU6
+	pop	ix			; restore ix back to it's initial state
 skip:
 	ret
 
@@ -57,21 +52,24 @@ skip:
 ayfx_api:
 	djnz	bnot1			; On if B<>1
 
-; B=1: set bank to the value in DE
+; **************************************************************
+; * B=1 and DE=user bank holding the sound effects
+; **************************************************************
+
 callId1_load_bank:
-reloc_5:
+reloc_c1_1:
 	call	backup_bank
 	ld	a,e			; user bank is in DE and set in A and as
 	add	a,e			; NextBASIC banks are in 16k: double it
-reloc_4:
+reloc_c1_2:
 	ld	(ayfx_bank),a		; store it for future use
 	nextreg MMU6_C000_NR_56, a 	; load the user's bank in
 	;ld 	hl,$C000		; user data sits at the start of the bank
 	push	ix
-reloc_6:
+reloc_c1_3:
 	call 	AFXINIT
 	pop	ix
-reloc_7:
+reloc_c1_4:
 	call	restore_bank
 	and     a                       ; clear carry to indicate success
 	ret
@@ -79,19 +77,19 @@ reloc_7:
 bnot1:
 	djnz    bnot2                   ; On if B<>2
 
-; B=2: start effect value DE
+; **************************************************************
+; * B=2 and DE=effect ID - start playing the given effect
+; **************************************************************
+
 callId2_set_effect:
-	;break
-reloc_8:
+reloc_c2_1:
 	call 	activate_user_bank
 	ld	a,e			; E = effect id
-reloc_call2_1:
-	ld	(ayfx_index), a
 	push	ix
-reloc_9:
+reloc_c2_2:
 	call 	AFXPLAY
 	pop	ix
-reloc_10:
+reloc_c2_3:
 	call	restore_bank
 	and     a                       ; clear carry to indicate success
 	ret
@@ -106,7 +104,13 @@ api_error:
 
 
 ; **************************************************************
-; Backup and restore whatever is in MMU6
+; Bank routines:
+; - backup_bank - reads the current bank in MMU6 and stores
+;   in `active_bank`
+; - activate_user_bank - calls backup, then loads the bank ID
+;   stored in `ayfx_bank` into MMU 6 (0xC000 onwards)
+; - restore_bank - takes the preserved bank in `active_bank`
+;   and points MMU 6 _back_ to it.
 ;
 ; uses: a, bc
 ; **************************************************************
@@ -116,20 +120,20 @@ backup_bank:
 	out 	(c),a
 	inc 	b ; $253b to access (read or write) value
 	in 	a,(c)
-reloc_ab1:
+reloc_br_1:
 	ld	(active_bank),a
 	ret
 
 activate_user_bank:
-reloc_aub1:
+reloc_br_2:
 	call	backup_bank
-reloc_aub2:
+reloc_br_3:
 	ld	a, (ayfx_bank)
 	nextreg	MMU6_C000_NR_56, a
 	ret
 
 restore_bank:
-reloc_ab2:
+reloc_br_4:
 	ld	(active_bank),a
 	nextreg MMU6_C000_NR_56, a
 	ret
@@ -164,10 +168,7 @@ reloc_ab2:
 ; ------------------------------------------------- -------------;
 
 AFXINIT
-	;inc hl
-;reloc_11:
-	;ld (afxBnkAdr+1),hl	        ; save the address of the offset table
-reloc_12:
+reloc_in_1:
 	ld hl,afxChDesc		        ; mark all channels as empty
 	ld de,#00ff
 	ld bc,#03fd
@@ -191,7 +192,7 @@ afxInit1 ; runs 15 times (from E register)
 	ld b,l
 	out (c),d
 	jr nz,afxInit1
-reloc_13:
+reloc_in_2:
 	ld (afxNseMix+1),de             ; reset the player variables
 	ret
 
@@ -204,7 +205,7 @@ reloc_13:
 
 AFXFRAME
 	ld bc,#03fd
-reloc_14:
+reloc_fm_1:
 	ld ix,afxChDesc
 
 afxFrame0
@@ -264,7 +265,7 @@ afxFrame1
 
 afxFrame2
 	inc hl
-reloc_15:
+reloc_fm_2:
 	ld (afxNseMix+1),a	        ; store the noise value
 
 afxFrame3
@@ -278,7 +279,7 @@ afxFrame4
 	rrca
 	djnz afxFrame4
 	ld d,a
-reloc_16:
+reloc_fm_3:
 	ld bc,afxNseMix+2	        ; save flag values
 	ld a,(bc)
 	xor e
@@ -341,7 +342,7 @@ afxBnkAdr
 	ld b,(hl)
 	add hl,bc			; effect address is held in HL
 	push hl				; save the address of the effect on the stack
-reloc_17:
+reloc_pl_1:
 	ld hl,afxChDesc		        ; find empty channel
 	ld b,3
 afxPlay0
@@ -388,14 +389,8 @@ ayfx_bank:
 active_bank:
         defb	0
 
-ayfx_index:
-        defb	0
 
-bank_backup:
-	defb	0
-
-
-
+; this ensures the build is 512 long (not 100% sure why though - probably memory baseds)
 	IF $ > 512
 		DISPLAY "Driver code exceeds 512 bytes"
 		shellexec "exit", "1"	; couldn't work out how to error ¯\_(ツ)_/¯
@@ -404,27 +399,29 @@ bank_backup:
 	ENDIF
 
 reloc_start:
-        defw    reloc_0+2
-        defw    reloc_1+2
-        defw    reloc_2+2
-        defw    reloc_3+2
-        defw    reloc_4+2
-        defw    reloc_5+2
-        defw    reloc_6+2
-        defw    reloc_7+2
-        defw    reloc_8+2
-        defw    reloc_9+2
-        defw    reloc_10+2
-        defw    reloc_11+2
-        defw    reloc_12+2
-        defw    reloc_13+3
-        defw    reloc_14+3
-        defw    reloc_15+2
-        defw    reloc_16+2
-        defw    reloc_17+2
-	defw	reloc_ab1+2
-	defw	reloc_ab2+2
-	defw	reloc_aub1+2
-	defw	reloc_aub2+2
-	defw	reloc_call2_1+2
+        defw	reloc_ir_1+2
+        defw	reloc_ir_2+2
+        defw	reloc_ir_3+2
+        defw	reloc_ir_4+2
+	defw	reloc_c1_1+2
+	defw	reloc_c1_2+2
+	defw	reloc_c1_3+2
+	defw	reloc_c1_4+2
+	defw	reloc_c2_1+2
+	defw	reloc_c2_2+2
+	defw	reloc_c2_3+2
+	defw	reloc_br_1+2
+	defw	reloc_br_2+2
+	defw	reloc_br_3+2
+	defw	reloc_br_4+2
+	defw 	reloc_in_1+2
+	; why is `reloc_in_2+3` and not `+2` like all the others? It's because
+	; reloc_in_2 points to `ld (afxNseMix+1),de` and the `ld (**),de` opcode
+	; is 2 bytes long, and so we have to jump over that amount to track the
+	; reference fully (or certainly that's how I understand it).
+	defw 	reloc_in_2+3
+	defw 	reloc_fm_1+3
+	defw 	reloc_fm_2+2
+	defw 	reloc_fm_3+2
+	defw	reloc_pl_1+2
 reloc_end:
