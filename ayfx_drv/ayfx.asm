@@ -17,7 +17,6 @@ api_entry:
 ; `nop` above). This is called because bit 7 of the driver id byte has been set
 ; in the .DRV file.
 im1_entry:
-
 ; Before we can call the play routine, we need to swap in the bank with
 ; the sfx, but if we don't have those details from the user code, then
 ; it'll bork. So I load in the user bank and if it's not been set yet
@@ -64,7 +63,6 @@ reloc_c1_1:
 reloc_c1_2:
 	ld	(ayfx_bank),a		; store it for future use
 	nextreg MMU6_C000_NR_56, a 	; load the user's bank in
-	;ld 	hl,$C000		; user data sits at the start of the bank
 	push	ix
 reloc_c1_3:
 	call 	AFXINIT
@@ -112,16 +110,26 @@ api_error:
 ; - restore_bank - takes the preserved bank in `active_bank`
 ;   and points MMU 6 _back_ to it.
 ;
-; uses: a, bc
+; uses: bc
 ; **************************************************************
 backup_bank:
-	ld 	bc,$243b ; select NEXT register
+	push	af			; this really isn't needed
+	ld 	bc,$243b 		; select NEXT register
+	in	a,(c)			; save register state (https://gitlab.com/thesmog358/tbblue/-/blob/master/demos/esp/espatdrv.asm#L277)
+reloc_br_0:
+	ld	(saved_reg), a
 	ld 	a, MMU6_C000_NR_56
 	out 	(c),a
-	inc 	b ; $253b to access (read or write) value
+	inc 	b 			; $253b to access (read or write) value
 	in 	a,(c)
 reloc_br_1:
 	ld	(active_bank),a
+	dec 	b 			; $243B
+	ld	a,2
+saved_reg equ $-1
+	out	(c),a			; just in case IRQ was in between registry work
+
+	pop	af
 	ret
 
 activate_user_bank:
@@ -410,6 +418,7 @@ reloc_start:
 	defw	reloc_c2_1+2
 	defw	reloc_c2_2+2
 	defw	reloc_c2_3+2
+	defw	reloc_br_0+2
 	defw	reloc_br_1+2
 	defw	reloc_br_2+2
 	defw	reloc_br_3+2
