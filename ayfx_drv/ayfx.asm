@@ -134,7 +134,7 @@ reloc_br_3:
 
 restore_bank:
 reloc_br_4:
-	ld	(active_bank),a
+	ld	a, (active_bank)
 	nextreg MMU6_C000_NR_56, a
 	ret
 
